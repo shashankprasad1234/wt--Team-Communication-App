@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+ <ion-input type ="text" placeholder="Enter Project Name"></ion-input>
+ <hr>
+ <ion-input type ="text" placeholder="Add team Member"></ion-input>
+ <hr>
+ <ion-button expand="block">Add Member</ion-button>
+ <hr>
+ <hr>
+ <ion-input type ="text" placeholder="Enter tasks"></ion-input>
+ <ion-item>
+  <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Enter Skill Required" slot="start">
+    <ion-select-option value="skill">Skill 1</ion-select-option>
+    <ion-select-option value="skill">Skill 2</ion-select-option>
+    <ion-select-option value="skill">Skill 3</ion-select-option>
+    <ion-select-option value="skill">Skill 4</ion-select-option>
+    <ion-select-option value="skill">Skill 5</ion-select-option>
+  </ion-select>
+</ion-item>
+ <hr>
+ <ion-button expand="block">Add Task</ion-button>
+ <hr>
+ <hr>
+ <ion-button expand="block">Save Project</ion-button>
+ <hr>
+ <hr>
+ <hr>
+ <ion-label>(Should display tasks and users here)</ion-label>
+ <hr>
+ <ion-button expand="block" href="login" fill ="clear">Back</ion-button>
+</ion-content>

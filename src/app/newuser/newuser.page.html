@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>User Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Enter Username</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <hr>
+  <ion-item>
+    <ion-label position="floating">Enter Email Address</ion-label>
+    <ion-input type="email"></ion-input>
+  </ion-item>
+  <hr>
+  <ion-item>
+    <ion-label position="floating">Enter Password</ion-label>
+    <ion-input type="password" minlength="8" name="pass"></ion-input>
+  </ion-item>
+  <hr>
+  <ion-item>
+    <ion-label position="floating">Confirm Password</ion-label>
+    <ion-input type="password" minlength="8" name="confpass"></ion-input>
+  </ion-item>
+  <hr>
+  <ion-button action=comp_pass() expand="block" href="userdetail">Enter More Details(??)</ion-button>
+  <ion-button expand="block" href="login" fill ="clear">Back</ion-button>
+</ion-content>
+

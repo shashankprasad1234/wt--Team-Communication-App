@@ -1,0 +1,7 @@
+{
+  "name": "taskman",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
