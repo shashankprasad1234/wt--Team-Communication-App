@@ -1,23 +1,46 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Home
+      New Project
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content >
+  <hr>
+  <hr>
+  <ion-item>
  <ion-input type ="text" placeholder="Enter Project Name"></ion-input>
+</ion-item>
  <hr>
- <ion-input type ="text" placeholder="Add team Member"></ion-input>
- <hr>
- <ion-button expand="block">Add Member</ion-button>
- <hr>
- <hr>
- <ion-input type ="text" placeholder="Enter tasks"></ion-input>
  <ion-item>
-  <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Enter Skill Required" slot="start">
+ <ion-input type ="text" placeholder="Add team Member" id="teammem" [(ngModel)]="memname"></ion-input>
+ <ion-button expand="block" (click)="addname()" ><ion-icon name="add"></ion-icon></ion-button>
+ 
+</ion-item>
+ <hr>
+ <ion-item *ngFor="let name of namelist; let i = index">
+  {{name}}
+  <div slot="end">
+		<ion-button  clear (click)="deletename(i)">
+			<ion-icon name="trash"></ion-icon>
+		</ion-button>
+	</div>
+</ion-item>
+
+ <ion-item-divider>
+</ion-item-divider>
+
+ <hr>
+ <ion-item>
+  <ion-input type ="text" placeholder="Enter tasks" [(ngModel)]="taskname"></ion-input>
+ </ion-item>
+ <hr>
+ <ion-item>
+  <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Enter Skill Required" slot="start" [(ngModel)]="skills">
     <ion-select-option value="skill">Skill 1</ion-select-option>
     <ion-select-option value="skill">Skill 2</ion-select-option>
     <ion-select-option value="skill">Skill 3</ion-select-option>
@@ -29,11 +52,14 @@
  <ion-button expand="block">Add Task</ion-button>
  <hr>
  <hr>
- <ion-button expand="block">Save Project</ion-button>
  <hr>
- <hr>
- <hr>
+ 
+ 
  <ion-label>(Should display tasks and users here)</ion-label>
  <hr>
- <ion-button expand="block" href="login" fill ="clear">Back</ion-button>
+ <ion-button expand="block" href="login" fill ="clear">Back(temp)</ion-button>
 </ion-content>
+
+<ion-footer>
+  <ion-button expand="block">Save Project</ion-button>
+</ion-footer>

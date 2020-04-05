@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+
+  <h1>Current Projects</h1>
+  <ion-item *ngFor="let p of projects" href="tasklist" >
+    <ion-label style="white-space: normal;">{{ p.title }}</ion-label>
+    <hr>
+    <ion-label>{{ p.creator}}</ion-label>
+    <hr>
+    <ion-label>{{ p.members }}</ion-label>
+  </ion-item>
+
+
+
+</ion-content>
+<ion-footer>
+  <ion-button expand="block">Refresh and pull to refresh<ion-icon name="refresh"></ion-icon></ion-button>
+</ion-footer>
