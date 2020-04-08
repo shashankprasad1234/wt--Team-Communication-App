@@ -13,13 +13,28 @@ export class MenuPage implements OnInit {
   pages = [
   {
     title: 'Home',
-    url: 'projectlist',
+    url: 'home',
     icon: 'home'
   },
   {
-    title: 'Add New Project',
-    url: 'home',
-    icon: 'add'
+    title: 'View Projects',
+    url: 'projectlist',
+    icon: 'eye'
+  },
+  {
+    title: 'Chat',
+    url: 'chat',
+    icon: 'chatbubbles'
+  },
+  {
+    title: 'profile',
+    url: 'profile',
+    icon: 'man'
+  },
+  {
+    title: 'Log Out',
+    url: '',
+    icon: 'log-out'
   }
 
 ];

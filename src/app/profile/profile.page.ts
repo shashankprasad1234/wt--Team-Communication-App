@@ -3,11 +3,11 @@ import { NavController } from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.page.html',
-  styleUrls: ['./chat.page.scss'],
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss'],
 })
-export class ChatPage implements OnInit {
+export class ProfilePage implements OnInit {
 
   pages = [
     {
@@ -39,12 +39,21 @@ export class ChatPage implements OnInit {
   ];
   selectedpath: string = '';
 
-  
+  profile = [
+    {
+      username: 'your name',
+      email: 'your email id',
+    }
+  ];
 
   constructor(public navCtrl: NavController, private router: Router) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
+  }
+
+  goback() {
+    this.router.navigate(['main/home'])
   }
 
   ngOnInit() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasklist',
@@ -27,7 +28,11 @@ export class TasklistPage implements OnInit {
     }
   ];
 
-  constructor() { }
+  goback(){
+    this.router.navigate(['main/projectlist'])
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

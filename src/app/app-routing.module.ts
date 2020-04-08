@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'aboutus',
     loadChildren: () => import('./aboutus/aboutus.module').then( m => m.AboutusPageModule)
   },
+  // {
+  //   path: 'profile',
+  //   loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  // },
   
   // { path: 'home', 
   //   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -37,10 +41,10 @@ const routes: Routes = [
   //   path: 'tasklist',
   //   loadChildren: () => import('./tasklist/tasklist.module').then( m => m.TasklistPageModule)
   // },
-  {
-    path: 'chat',
-    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
-  },
+  // {
+  //   path: 'chat',
+  //   loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+  // },
   
 ];
 

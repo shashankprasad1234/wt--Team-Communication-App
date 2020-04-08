@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    
     <ion-title>tasklist</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -29,6 +30,6 @@
 
 </ion-content>
 <ion-footer>
-  <ion-button expand="block" href="projectlist" fill ="clear">Back(temp)</ion-button>
+  <ion-button expand="block" (click)="goback()" fill ="clear"><ion-icon name="arrow-back"></ion-icon>  Back(temp) </ion-button>
   <ion-button expand="block" href="chat">Discuss with the group <ion-icon name="chatbox-ellipses-outline"></ion-icon></ion-button>
 </ion-footer>

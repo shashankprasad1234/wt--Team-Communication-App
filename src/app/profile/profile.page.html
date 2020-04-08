@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item padding *ngFor="let p of profile">
+    <ion-label>Username : {{ p.username }}</ion-label>
+    
+  </ion-item>
+  <hr>
+  <ion-item padding *ngFor="let q of profile">
+    <ion-label>Email Id: {{ q.email}} </ion-label>
+
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" (click)="goback()" fill ="clear"><ion-icon name="arrow-back"></ion-icon>  Back(temp) </ion-button>
+  
+</ion-footer>
