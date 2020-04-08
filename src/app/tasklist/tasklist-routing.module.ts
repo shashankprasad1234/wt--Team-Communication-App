@@ -5,7 +5,7 @@ import { TasklistPage } from './tasklist.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tasklist',
     component: TasklistPage
   }
 ];

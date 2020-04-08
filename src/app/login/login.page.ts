@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { mapToMapExpression } from '@angular/compiler/src/render3/util';
 import { map, first} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 interface User{
   email?: string;
@@ -22,9 +23,11 @@ export class LoginPage implements OnInit {
   };
 
 
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
- 
+  gotosignuppage() {
+    this.router.navigate(['resetpassword'])
+  }
 
   async createacc(){
     const user =await this.afAuth.createUserWithEmailAndPassword(

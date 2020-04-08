@@ -7,20 +7,20 @@
 <ion-content padding>
   <ion-item padding>
     <ion-label position="floating">Enter Email</ion-label>
-    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+    <ion-input id="username" type="email" [(ngModel)]="user.email"></ion-input>
   </ion-item>
   <hr>
   <ion-item padding>
     <ion-label position="floating">Enter Password</ion-label>
-    <ion-input type="password" minlength="8" [(ngModel)]="user.password"></ion-input>
+    <ion-input id="password" type="password" minlength="8" [(ngModel)]="user.password"></ion-input>
   </ion-item>
   <hr>
   <hr>
  <hr>
 
-  <ion-button expand="block" (click)="login()" >Login</ion-button>
-  <ion-button expand="block" (click)="createacc()" fill ="clear">Create New User</ion-button>
-  <ion-button expand="block"  href="resetpassword" fill ="clear">Reset Password(not needed)</ion-button>
+  <ion-button id="login" expand="block" (click)="login()" >Login</ion-button>
+  
+  <ion-button id="signup" expand="block"  (click)="gotosignuppage()" fill ="clear">Sign Up</ion-button>
   <hr>
  <hr>
  <hr>
@@ -29,7 +29,7 @@
  <hr>
  <hr>
  <hr>
-  <ion-button expand="block"  href="menu" fill ="clear">Go to home(temp)</ion-button>
+  
 
   
 </ion-content>

@@ -15,12 +15,14 @@
 
 
   <h1>Current Projects</h1>
-  <ion-item *ngFor="let p of projects" href="tasklist" >
+  <ion-item *ngFor="let p of projects">
     <ion-label style="white-space: normal;">{{ p.title }}</ion-label>
     <hr>
     <ion-label>{{ p.creator}}</ion-label>
     <hr>
     <ion-label>{{ p.members }}</ion-label>
+    <hr>
+    <ion-label><ion-button expand="block"><ion-icon name="information-circle"></ion-icon></ion-button></ion-label>
   </ion-item>
 
 

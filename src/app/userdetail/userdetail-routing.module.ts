@@ -5,8 +5,18 @@ import { UserdetailPage } from './userdetail.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: UserdetailPage
+    path: 'userdetail',
+
+    
+    component: UserdetailPage,
+    children:[
+      
+        {
+          path: 'userdetail/menu',
+          loadChildren: () => import('../menu/menu.module').then( m => m.MenuPageModule)
+        }
+      
+    ]
   }
 ];
 
