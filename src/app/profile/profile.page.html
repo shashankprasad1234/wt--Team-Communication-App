@@ -6,20 +6,21 @@
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
-  <ion-item padding *ngFor="let p of profile">
-    <ion-label>Username: {{ p.username }}</ion-label>
-    
+<ion-content *ngFor="let user of presUserArr">
+  <ion-item>
+    <ion-label>Username: {{ user.username }}</ion-label>
   </ion-item>
-  <hr>
-  <ion-item padding *ngFor="let q of profile">
-    <ion-label>Email Id: {{ q.email}} </ion-label>
 
+  <ion-item>
+    <ion-label>Name: {{ user.firstname}} {{user.lastname}} </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Email Id: {{ user.email}} </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Skills: {{ user.skills}} </ion-label>
   </ion-item>
 </ion-content>
 
-<ion-footer>
-  <ion-button expand="block" (click)="goback()" fill ="clear"><ion-icon name="arrow-back"></ion-icon>  Back(temp) </ion-button>
-  
-</ion-footer>

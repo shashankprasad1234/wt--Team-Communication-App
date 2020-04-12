@@ -12,8 +12,10 @@ import * as firebase from 'firebase';
 })
 export class HomePage {
 
-  tasklist=[];
-  namelist=[];
+  skills = [];
+  tasklist = [];
+  skillslist = [];
+  namelist = [];
   taskname: string = "";
   memname: string = "";
 
@@ -24,7 +26,7 @@ export class HomePage {
       icon: 'home'
     },
     {
-      title: 'View Projects',
+      title: 'Projects',
       url: 'projectlist',
       icon: 'eye'
     },
@@ -63,9 +65,27 @@ export class HomePage {
   
     }
   }
+
   deletename(index){
     this.namelist.splice(index, 1);
 }
+
+  addtask()
+  {
+    if (this.taskname.length > 0) {
+      let name = this.taskname;
+      this.tasklist.push(name);
+      this.taskname = "";
+    }
+    this.skillslist.push(this.skills);
+    this.skills = [];
+  }
+
+  deletetask(index)
+  {
+    this.tasklist.splice(index, 1);
+  }
+
   ngOnInit(){
     console.log(this.authService.getUser());
     let self = this;

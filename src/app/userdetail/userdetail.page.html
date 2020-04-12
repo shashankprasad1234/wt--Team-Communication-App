@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>uComplete Sign-Up</ion-title>
+    <ion-title>Complete Sign-Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
     <ion-label position="floating">First Name</ion-label>
-    <ion-input type="text" [(ngModel)]="firstname"></ion-input>
+    <ion-input type="text" [(ngModel)]="firstname" required></ion-input>
   </ion-item>
   <hr>
   <ion-item>
@@ -17,23 +17,23 @@
   <hr>
   <ion-item>
     <ion-label>Gender</ion-label>
-    <ion-select placeholder="Select One" [(ngModel)]="gender">
-      <ion-select-option value="f">Female</ion-select-option>
-      <ion-select-option value="m">Male</ion-select-option>
-      <ion-select-option value="m">Other</ion-select-option>
+    <ion-select placeholder="Select One" [(ngModel)]="gender" required>
+      <ion-select-option>Female</ion-select-option>
+      <ion-select-option>Male</ion-select-option>
+      <ion-select-option>Other</ion-select-option>
     </ion-select>
   </ion-item>
   <hr>
   <ion-item>
     <ion-select [(ngModel)]="skills" multiple="true" cancelText="Cancel" okText="Enter" placeholder="Enter User Skills" slot="start">
-      <ion-select-option value="skill">Machine Learning</ion-select-option>
-      <ion-select-option value="skill">Artifical Intelligence</ion-select-option>
-      <ion-select-option value="skill">Natural Language Processing</ion-select-option>
-      <ion-select-option value="skill">Network Security</ion-select-option>
-      <ion-select-option value="skill">Operating Systems</ion-select-option>
+      <ion-select-option>Machine Learning</ion-select-option>
+      <ion-select-option>Artifical Intelligence</ion-select-option>
+      <ion-select-option>Natural Language Processing</ion-select-option>
+      <ion-select-option>Network Security</ion-select-option>
+      <ion-select-option>Operating Systems</ion-select-option>
     </ion-select>
   </ion-item>
   <hr>
-  <ion-button expand="block" (click)="gotomainpage()" id="login">Complete User Login</ion-button>
+  <ion-button expand="block" (click)="saveDetails()" id="login">Complete Sign Up</ion-button>
   
 </ion-content>

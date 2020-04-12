@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authentication.service';
+import 'firebase/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-userdetail',
@@ -11,12 +13,18 @@ import { AuthenticateService } from '../services/authentication.service';
 })
 export class UserdetailPage implements OnInit {
 
-  constructor(private router: Router, private alertCtrl: AlertController, private authService: AuthenticateService) { }
+  constructor(private router: Router,
+    private alertCtrl: AlertController,
+    private authService: AuthenticateService,
+    private firestore: AngularFirestore) { }
 
+  currUser = firebase.auth().currentUser
   firstname: string = '';
   lastname: string = '';
   gender: string = '';
-  skills: string = '';
+  skills = [];
+  username = this.currUser.displayName;
+  email = this.currUser.email;
   
 
   ngOnInit() {
@@ -35,18 +43,28 @@ export class UserdetailPage implements OnInit {
     await alert.present();
   }
 
-  gotomainpage() {
+  saveDetails() {
     if(this.firstname.length != 0 && this.lastname.length != 0 && this.gender.length != 0 && this.skills.length != 0){
-      this.alert('Success','Details recorded');
+      new Promise<any>((resolve, reject) => 
+      {
+        this.firestore
+          .collection("users")
+          .add({
+                email: this.email,
+                username: this.username,
+                firstname: this.firstname,
+                lastname: this.lastname,
+                gender: this.gender,
+                skills: this.skills
+          })
+          .then(res => {}, err => reject(err));
+      })
       this.router.navigate(["menu"]);
 
     }
     else{
       this.alert('Error','Fill details!');
-      console.log(this.firstname,this.lastname,this.gender, this.skills)
     }
-    
   }
 
-  
 }

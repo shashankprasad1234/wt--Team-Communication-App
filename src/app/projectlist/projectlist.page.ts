@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import 'firebase/auth'
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-projectlist',
@@ -9,14 +12,14 @@ import { Router, RouterEvent } from '@angular/router';
 export class ProjectlistPage implements OnInit {
   projects = [
     {
-      title: 'project1',
+      title: 'Sample Project 1',
       creator: 'a',
-      members: 'a,b,c,d'
+      members: 'a, b, c, d'
     },
     {
-      title: 'Project 2',
+      title: 'Sample Project 2',
       creator: 'b',
-      members: 'a,b,c'
+      members: 'a, b, c'
     }
   ];
 
@@ -27,7 +30,7 @@ export class ProjectlistPage implements OnInit {
       icon: 'home'
     },
     {
-      title: 'View Projects',
+      title: 'Projects',
       url: 'projectlist',
       icon: 'eye'
     },
@@ -70,6 +73,18 @@ export class ProjectlistPage implements OnInit {
   }
 
   ngOnInit() {
+    let self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        
+        console.log("logged in");
+        
+        // User is signed in.
+      } else {
+        console.log("logged out");
+        self.router.navigate([''])
+      }
+    });
   }
 
 }

@@ -18,7 +18,7 @@ export class ChatPage implements OnInit {
       icon: 'home'
     },
     {
-      title: 'View Projects',
+      title: 'Projects',
       url: 'projectlist',
       icon: 'eye'
     },

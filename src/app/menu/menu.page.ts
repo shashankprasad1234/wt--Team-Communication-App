@@ -18,7 +18,7 @@ export class MenuPage implements OnInit {
     icon: 'home'
   },
   {
-    title: 'View Projects',
+    title: 'Projects',
     url: 'projectlist',
     icon: 'eye'
   },
@@ -54,7 +54,7 @@ export class MenuPage implements OnInit {
 
   projectlistpage = [
     {
-      title: 'View Projects',
+      title: 'Projects',
       url: 'projectlist',
       icon: 'eye'
     }

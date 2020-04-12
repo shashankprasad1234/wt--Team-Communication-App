@@ -3,6 +3,10 @@ import { NavController } from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import 'firebase/auth';
 import * as firebase from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { User } from '../models/user.model';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +15,19 @@ import * as firebase from 'firebase';
 })
 export class ProfilePage implements OnInit {
 
+  constructor(
+    public navCtrl: NavController,
+    private router: Router,
+    private afs: AngularFirestore,
+    private db: AngularFireDatabase,
+    private userService: FirebaseService
+    ) {
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.selectedpath = event.url;
+    });
+  }
+
+  userArr: User[] = [];
   pages = [
     {
       title: 'Home',
@@ -18,7 +35,7 @@ export class ProfilePage implements OnInit {
       icon: 'home'
     },
     {
-      title: 'View Projects',
+      title: 'Projects',
       url: 'projectlist',
       icon: 'eye'
     },
@@ -41,34 +58,34 @@ export class ProfilePage implements OnInit {
   ];
   selectedpath: string = '';
 
-  profile = [
-    {
-      username: 'your name',
-      email: 'your email id',
-    }
-  ];
-
-  constructor(public navCtrl: NavController, private router: Router) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
-  }
+  presUserArr: User[] = [];
+  currUser = firebase.auth().currentUser
+  username = this.currUser.displayName;
 
   goback() {
     this.router.navigate(['main/home'])
   }
 
   ngOnInit() {
-    let self = this;
+    this.userService.getUsers().subscribe(data => 
+      {
+        console.log(data);
+        this.userArr = data.map( user => {
+          const userData = user.payload.doc.data() as User;
+          if(userData.username == this.username)
+          {
+            this.presUserArr.push(userData);
+          }
+          return userData;
+        })
+      })
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        
         console.log("logged in");
-        
         // User is signed in.
       } else {
         console.log("logged out");
-        self.router.navigate([''])
+        this.router.navigate([''])
       }
     });
   }

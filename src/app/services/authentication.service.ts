@@ -24,7 +24,7 @@ export class AuthenticateService {
   }
   
   setUser(user: string){
-    this.storage.set('user',user)
+    this.storage.set('user', user)
   }
 
   getUser(){
