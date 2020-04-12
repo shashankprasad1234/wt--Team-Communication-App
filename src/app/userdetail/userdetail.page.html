@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>userdetail</ion-title>
+    <ion-title>uComplete Sign-Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
-    <ion-label position="floating">Enter First Name</ion-label>
+    <ion-label position="floating">First Name</ion-label>
     <ion-input type="text" [(ngModel)]="firstname"></ion-input>
   </ion-item>
   <hr>
   <ion-item>
-    <ion-label position="floating">Enter Last Name</ion-label>
+    <ion-label position="floating">Last Name</ion-label>
     <ion-input type="text" [(ngModel)]="lastname"></ion-input>
   </ion-item>
   <hr>
@@ -20,16 +20,17 @@
     <ion-select placeholder="Select One" [(ngModel)]="gender">
       <ion-select-option value="f">Female</ion-select-option>
       <ion-select-option value="m">Male</ion-select-option>
+      <ion-select-option value="m">Other</ion-select-option>
     </ion-select>
   </ion-item>
   <hr>
   <ion-item>
     <ion-select [(ngModel)]="skills" multiple="true" cancelText="Cancel" okText="Enter" placeholder="Enter User Skills" slot="start">
-      <ion-select-option value="skill">Skill 1</ion-select-option>
-      <ion-select-option value="skill">Skill 2</ion-select-option>
-      <ion-select-option value="skill">Skill 3</ion-select-option>
-      <ion-select-option value="skill">Skill 4</ion-select-option>
-      <ion-select-option value="skill">Skill 5</ion-select-option>
+      <ion-select-option value="skill">Machine Learning</ion-select-option>
+      <ion-select-option value="skill">Artifical Intelligence</ion-select-option>
+      <ion-select-option value="skill">Natural Language Processing</ion-select-option>
+      <ion-select-option value="skill">Network Security</ion-select-option>
+      <ion-select-option value="skill">Operating Systems</ion-select-option>
     </ion-select>
   </ion-item>
   <hr>
