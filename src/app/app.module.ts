@@ -16,6 +16,7 @@ import { AuthenticateService} from './services/authentication.service';
 
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IonicStorageModule } from  '@ionic/storage'; // Need to download this manually using npm install --save @ionic/storage
 
 firebase.initializeApp(environment.firebase);
 
@@ -23,7 +24,7 @@ firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebase),AngularFireDatabaseModule,ReactiveFormsModule,AngularFireAuthModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebase),AngularFireDatabaseModule,ReactiveFormsModule,AngularFireAuthModule,IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,

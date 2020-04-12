@@ -55,6 +55,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.authService.getUser());
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

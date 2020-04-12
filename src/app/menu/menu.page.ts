@@ -95,7 +95,7 @@ export class MenuPage implements OnInit {
   logOut(){
     this.authService.logoutUser();
     
-    
+    this.authService.setUser('');
 
     this.router.navigate(['']);
   }

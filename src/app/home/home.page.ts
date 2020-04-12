@@ -69,6 +69,7 @@ export class HomePage {
     this.namelist.splice(index, 1);
 }
   ngOnInit(){
+    console.log(this.authService.getUser());
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
