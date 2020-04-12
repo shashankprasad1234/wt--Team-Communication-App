@@ -7,11 +7,15 @@ import { MenuPage } from './menu.page';
 
 const routes: Routes = [
   {
+    path: 'userdetail/menu',
+    redirectTo: 'main/home',
+    pathMatch: 'full'
+  },
+  {
     path: 'menu',
     redirectTo: 'main/home',
     pathMatch: 'full'
   },
-
   {
     path: 'main',
     component: MenuPage,

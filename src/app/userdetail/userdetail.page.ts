@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { AuthenticateService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-userdetail',
@@ -10,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class UserdetailPage implements OnInit {
 
-  constructor(private router: Router, private alertCtrl: AlertController) { }
+  constructor(private router: Router, private alertCtrl: AlertController, private authService: AuthenticateService) { }
 
   firstname: string = '';
   lastname: string = '';
@@ -19,6 +20,10 @@ export class UserdetailPage implements OnInit {
   
 
   ngOnInit() {
+    if(this.authService.userDetails() != null){
+      console.log(this.authService.userDetails().displayName);
+    }
+    
   }
 
   async alert(title: string, message: string) {
@@ -42,4 +47,6 @@ export class UserdetailPage implements OnInit {
     }
     
   }
+
+  
 }

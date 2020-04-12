@@ -1,3 +1,4 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-title>Taskman</ion-title>
@@ -7,18 +8,18 @@
 <ion-content padding>
   <ion-item padding>
     <ion-label position="floating">Enter Email</ion-label>
-    <ion-input id="username" type="email" [(ngModel)]="user.email"></ion-input>
+    <ion-input id="username" type="email" [(ngModel)]="user"></ion-input>
   </ion-item>
   <hr>
   <ion-item padding>
     <ion-label position="floating">Enter Password</ion-label>
-    <ion-input id="password" type="password" minlength="8" [(ngModel)]="user.password"></ion-input>
+    <ion-input id="password" type="password" minlength="8" [(ngModel)]="password"></ion-input>
   </ion-item>
   <hr>
   <hr>
  <hr>
 
-  <ion-button id="login" expand="block" (click)="login()" >Login</ion-button>
+  <ion-button id="login" expand="block" (click)="loginUser()" >Login</ion-button>
   
   <ion-button id="signup" expand="block"  (click)="gotosignuppage()" fill ="clear">Sign Up</ion-button>
   <hr>

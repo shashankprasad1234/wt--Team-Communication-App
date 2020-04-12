@@ -3,6 +3,9 @@ import { LoginPage } from '../login/login.page';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { NavController } from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
+import { AuthenticateService } from '../services/authentication.service';
+import 'firebase/auth'
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -48,7 +51,7 @@ export class HomePage {
 
   
 
-  constructor(public navCtrl: NavController, private router: Router) {
+  constructor(public navCtrl: NavController, private router: Router, private authService: AuthenticateService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -65,6 +68,19 @@ export class HomePage {
   deletename(index){
     this.namelist.splice(index, 1);
 }
-
+  ngOnInit(){
+    let self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        
+        console.log("logged in");
+        
+        // User is signed in.
+      } else {
+        console.log("logged out");
+        self.router.navigate([''])
+      }
+    });
+  }
 
 }

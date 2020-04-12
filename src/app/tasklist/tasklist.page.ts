@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import 'firebase/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-tasklist',
@@ -35,6 +37,18 @@ export class TasklistPage implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    let self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        
+        console.log("logged in");
+        
+        // User is signed in.
+      } else {
+        console.log("logged out");
+        self.router.navigate([''])
+      }
+    });
   }
 
 }

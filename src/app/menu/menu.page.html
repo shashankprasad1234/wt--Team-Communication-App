@@ -10,10 +10,51 @@
 
   <ion-content>
 <ion-list>
-  <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+  <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
     <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
       <ion-icon [name]=p.icon slot="start"></ion-icon>
       <ion-label>{{ p.title }}</ion-label>
+    </ion-item>
+
+  </ion-menu-toggle> -->
+  <ion-menu-toggle auto-hide="false" *ngFor="let q of homepage">
+    <ion-item [routerLink]="" routerDirection="root" routerLinkActive="active" (click)="gotohome()">
+      <ion-icon [name]=q.icon slot="start"></ion-icon>
+      <ion-label>{{ q.title }}</ion-label>
+    </ion-item>
+
+  </ion-menu-toggle>
+
+
+  <ion-menu-toggle auto-hide="false" *ngFor="let q of projectlistpage">
+    <ion-item [routerLink]="" routerDirection="root" routerLinkActive="active" (click)="gotoprojects()">
+      <ion-icon [name]=q.icon slot="start"></ion-icon>
+      <ion-label>{{ q.title }}</ion-label>
+    </ion-item>
+
+  </ion-menu-toggle>
+
+
+  <ion-menu-toggle auto-hide="false" *ngFor="let q of chatpage">
+    <ion-item [routerLink]="" routerDirection="root" routerLinkActive="active" (click)="gotochat()">
+      <ion-icon [name]=q.icon slot="start"></ion-icon>
+      <ion-label>{{ q.title }}</ion-label>
+    </ion-item>
+
+  </ion-menu-toggle>
+
+  <ion-menu-toggle auto-hide="false" *ngFor="let q of profilepage">
+    <ion-item [routerLink]="" routerDirection="root" routerLinkActive="active" (click)="gotoprofile()">
+      <ion-icon [name]=q.icon slot="start"></ion-icon>
+      <ion-label>{{ q.title }}</ion-label>
+    </ion-item>
+
+  </ion-menu-toggle>
+
+  <ion-menu-toggle auto-hide="false" *ngFor="let q of logoutpage">
+    <ion-item [routerLink]="" routerDirection="root" routerLinkActive="active" (click)="logOut()">
+      <ion-icon [name]=q.icon slot="start"></ion-icon>
+      <ion-label>{{ q.title }}</ion-label>
     </ion-item>
 
   </ion-menu-toggle>

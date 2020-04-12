@@ -1,66 +1,72 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import { mapToMapExpression } from '@angular/compiler/src/render3/util';
-import { map, first} from 'rxjs/operators';
-import { Router } from '@angular/router';
 
-interface User{
-  email?: string;
-  password?: string;
-}
+import { Router } from '@angular/router';
+import { AuthenticateService } from '../services/authentication.service';
+import { AlertController, NavController } from '@ionic/angular';
+import 'firebase/auth'
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
+
 export class LoginPage implements OnInit {
-  user: User = {
-    email: "example3@gmail.com",
-    password: "12345678",
-  };
+  public flag = false;
+  user: string = '';
+  password: string = '';
+  signed_user: string = '';
 
+  
+  
+  constructor(private authService: AuthenticateService, private router: Router, private alertCtrl: AlertController, private navCtrl: NavController) { }
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { }
+  async loginUser(): Promise<void> {
+    this.authService.loginUser(this.user, this.password).then(
+      () => {
+        console.log(this.authService.loggedin);
+        console.log(this.authService.userDetails().email);
+        this.router.navigate(['userdetail/menu']);
+      },
+      async error => {
+        const alert = await this.alertCtrl.create({
+          message: error.message,
+          buttons: [{ text: 'Ok', role:'cancel'}],
+        });
+        await alert.present();
+      }
+    )
+  }
 
-  gotosignuppage() {
+  gotosignuppage(){
     this.router.navigate(['resetpassword'])
   }
 
-  async createacc(){
-    const user =await this.afAuth.createUserWithEmailAndPassword(
-      this.user.email,
-      this.user.password,
-    );
-    console.log(user);
+  redirect(){
+   
+      this.router.navigate(['userdetail/home']);
   }
-  async login()
-  {
-    const user = await this.afAuth.signInWithEmailAndPassword(
-      this.user.email,
-      this.user.password,
-    );
-    console.log(user);
-    if (this.afAuth.authState !=null)
-    {
-      const userconf = this.afAuth.authState.pipe(first()).toPromise();
-    }
-    if(user){
-      this.afAuth.authState.pipe(map(authState => authState.uid));
-      console.log(this.afAuth.authState.pipe(map(authState => authState.uid)));
 
-      
-    }
-    else {
-      console.log("none");
-
-    }
-
+  signnedIn() {
+   
   }
 
   ngOnInit() {
+    let self = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        
+        console.log("logged in");
+        self.router.navigate(['userdetail/menu'])
+        // User is signed in.
+      } else {
+        console.log("logged out");
+        return false;
+      }
+    });
+    
   }
-
 }

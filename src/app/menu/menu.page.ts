@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
+import { AuthenticateService } from '../services/authentication.service';
 
 
 @Component({
@@ -30,17 +31,77 @@ export class MenuPage implements OnInit {
     title: 'profile',
     url: 'profile',
     icon: 'man'
-  },
-  {
-    title: 'Log Out',
-    url: '',
-    icon: 'log-out'
   }
+ 
 
 ];
 
+  logoutpage = [
+    {
+      title: 'Log Out',
+      icon: 'log-out',
+      
+    }
+  ]
+
+  homepage = [
+    {
+      title: 'Home',
+      url: 'home',
+      icon: 'home'
+    }
+  ]
+
+  projectlistpage = [
+    {
+      title: 'View Projects',
+      url: 'projectlist',
+      icon: 'eye'
+    }
+  ]
+
+  chatpage = [
+    {
+      title: 'Chat',
+      url: 'chat',
+      icon: 'chatbubbles'
+    }
+  ]
+
+  profilepage = [
+    {
+      title: 'profile',
+      url: 'profile',
+      icon: 'man'
+    }
+  ]
+
+  gotohome(){
+    this.router.navigate(['main/home'])
+  }
+
+  gotoprojects(){
+    this.router.navigate(['main/projectlist'])
+  }
+
+  gotochat(){
+    this.router.navigate(['main/chat'])
+  }
+
+  gotoprofile(){
+    this.router.navigate(['main/profile'])
+  }
+
+  logOut(){
+    this.authService.logoutUser();
+    
+    
+
+    this.router.navigate(['']);
+  }
+
   selectedpath ='';
-  constructor(private router:Router) {
+  constructor(private router:Router, private authService: AuthenticateService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
