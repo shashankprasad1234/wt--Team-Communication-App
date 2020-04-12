@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
 import 'firebase/auth';
 import * as firebase from 'firebase';
-import { AuthenticateService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-tasklist',
@@ -31,43 +30,11 @@ export class TasklistPage implements OnInit {
     }
   ];
 
-  pages = [
-    {
-      title: 'Home',
-      url: 'home',
-      icon: 'home'
-    },
-    {
-      title: 'View Projects',
-      url: 'projectlist',
-      icon: 'eye'
-    },
-    {
-      title: 'Chat',
-      url: 'chat',
-      icon: 'chatbubbles'
-    },
-    {
-      title: 'profile',
-      url: 'profile',
-      icon: 'man'
-    },
-    {
-      title: 'Log Out',
-      url: '',
-      icon: 'log-out'
-    }
-  ]
-
   goback(){
     this.router.navigate(['main/projectlist'])
   }
-  selectedpath = '';
-  constructor(private router: Router, private authService: AuthenticateService) { 
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
-  }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
     let self = this;

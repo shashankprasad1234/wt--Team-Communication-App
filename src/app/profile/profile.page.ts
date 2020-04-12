@@ -28,7 +28,7 @@ export class ProfilePage implements OnInit {
       icon: 'chatbubbles'
     },
     {
-      title: 'profile',
+      title: 'Profile',
       url: 'profile',
       icon: 'man'
     },

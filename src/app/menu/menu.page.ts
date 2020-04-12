@@ -70,7 +70,7 @@ export class MenuPage implements OnInit {
 
   profilepage = [
     {
-      title: 'profile',
+      title: 'Profile',
       url: 'profile',
       icon: 'man'
     }
