@@ -18,8 +18,6 @@ export class ProfilePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private router: Router,
-    private afs: AngularFirestore,
-    private db: AngularFireDatabase,
     private userService: FirebaseService
     ) {
     this.router.events.subscribe((event: RouterEvent) => {
