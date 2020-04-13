@@ -30,7 +30,7 @@
   <ion-toolbar color="light">
     <ion-row>
       <ion-col size="10">
-        <textarea autosize maxRows="3" [(ngModel)]="message" class="message-input"></textarea>
+        <ion-input type="text" (keyup.enter)="sendMessage()" [(ngModel)]="message" class="message-input"></ion-input>
       </ion-col>
       <ion-col size="2">
         <ion-button expand='block' fill="clear" color="primary" [disabled]="message === ''" class="msg-btn" (click)="sendMessage()">
