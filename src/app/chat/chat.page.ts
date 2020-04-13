@@ -21,7 +21,7 @@ export class ChatPage implements OnInit {
   currentUser = this.username;
 
 
-
+  currProject : string = '';
 
   pages = [
     {
@@ -69,9 +69,12 @@ export class ChatPage implements OnInit {
         this.presUserArr = [];
         this.userArr = data.map( user => {
           console.log(user.payload.doc.metadata)
-          const userData = user.payload.doc.data() as User;
-           
-            this.presUserArr.push(userData);
+          const userData = user.payload.doc.data();
+          this.currProject = this.userService.setCurrProject();
+            if(userData.group == this.currProject){
+              this.presUserArr.push(userData);
+            }
+            
           
             
             console.log(userData)
@@ -88,9 +91,9 @@ export class ChatPage implements OnInit {
   
   
   sendMessage(){
-    
+    console.log(this.currProject);
     this.firestore.collection('chattemp').add({
-      group: "projectname",
+      group: this.currProject,
       message: this.message,
       username: this.username,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
@@ -103,7 +106,9 @@ export class ChatPage implements OnInit {
 
   
   ngOnInit() {
+    console.log(this.currProject);
     
+    console.log(this.currProject);
     
 
     let self = this;

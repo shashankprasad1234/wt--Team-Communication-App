@@ -4,6 +4,8 @@ import 'firebase/auth'
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
 import { Project } from '../models/project.model';
+import { ChatPageModule } from '../chat/chat.module';
+import { ChatPage } from '../chat/chat.page';
 
 
 @Component({
@@ -61,6 +63,14 @@ export class ProjectlistPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 5000);
+  }
+
+  goToChat(projectName: string){
+    console.log(this.fireService.currProject);
+    this.fireService.currProject = projectName;
+    console.log(this.fireService.currProject);
+    
+    this.router.navigate(['main/chat'])
   }
 
   ngOnInit() {

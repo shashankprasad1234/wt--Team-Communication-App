@@ -14,7 +14,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Created By: {{ p.createdBy}}</ion-label>
-      <ion-button (click)="goToChat()">Team Chat</ion-button>
+      <ion-button (click)="goToChat(p.name)">Team Chat</ion-button>
     </ion-item>
     <ion-item lines="none"> Members:  
       <ion-label> {{ p.members }}</ion-label>

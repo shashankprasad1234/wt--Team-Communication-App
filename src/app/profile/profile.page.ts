@@ -57,7 +57,7 @@ export class ProfilePage implements OnInit {
   presUserArr: User[] = [];
   currUser = firebase.auth().currentUser
   username = this.currUser.displayName;
-
+  currProject : string = '';
   goback() {
     this.router.navigate(['main/home'])
   }
