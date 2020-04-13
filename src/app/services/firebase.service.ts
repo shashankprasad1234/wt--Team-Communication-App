@@ -25,6 +25,11 @@ export class FirebaseService {
     return this.firestore.collection('projects').ref;
   }
 
+  getChatDetails(){
+    let chatRef = this.firestore.collection<any>('chattemp', ref => ref.orderBy('created_at'));
+    return chatRef.snapshotChanges()
+  }
+
   createProject(project: Project)
   {
     return this.firestore.collection('projects').add({...project});
