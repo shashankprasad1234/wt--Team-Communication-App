@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
-import { ThrowStmt } from '@angular/compiler';
 import { AuthenticateService } from '../services/authentication.service';
 
 
