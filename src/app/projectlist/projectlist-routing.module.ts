@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: '',
     component: ProjectlistPage
-  }
-];
+  },
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

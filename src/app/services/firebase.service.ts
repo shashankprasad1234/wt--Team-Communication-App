@@ -9,7 +9,7 @@ import { Project } from '../models/project.model';
 export class FirebaseService {
 
   constructor(private firestore: AngularFirestore) { }
-
+  currProject: string = '';
   thisUser: User;
 
   getUsers() {
@@ -35,6 +35,10 @@ export class FirebaseService {
     return this.firestore.collection('projects').add({...project});
   }
 
+  setCurrProject(){
+   return this.currProject;
+
+  }
   getUser(username: string)
   {
     this.firestore.collection('users').ref
