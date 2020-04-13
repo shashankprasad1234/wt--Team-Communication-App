@@ -6,7 +6,8 @@
     <ion-title>Chat</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+
+<ion-content #contentArea>
   <ion-grid>
     <ion-row *ngFor="let user of presUserArr">
       <ion-col  offset="3" size="9" *ngIf="currentUser === user.username" class="message other-message"> 

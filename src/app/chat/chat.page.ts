@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { NavController, IonContent} from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import 'firebase/auth';
 import * as firebase from 'firebase';
@@ -14,6 +14,7 @@ import { User } from '../models/user.model';
 })
 export class ChatPage implements OnInit {
 
+  @ViewChild(IonContent, {static: true}) contentArea: IonContent;
   currUser = firebase.auth().currentUser
   username = this.currUser.displayName;
   message: string = '';
@@ -57,7 +58,11 @@ export class ChatPage implements OnInit {
   presUserArr: User[] = [];
   timearr: any;
   
-  constructor(public navCtrl: NavController, private router: Router, private firestore: AngularFirestore, private userService: FirebaseService) {
+  constructor(public navCtrl: NavController,
+    private router: Router,
+    private firestore: AngularFirestore,
+    private userService: FirebaseService,
+    public _zone: NgZone) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -74,9 +79,6 @@ export class ChatPage implements OnInit {
             if(userData.group == this.currProject){
               this.presUserArr.push(userData);
             }
-            
-          
-            
             console.log(userData)
           return userData;
         })
@@ -86,10 +88,6 @@ export class ChatPage implements OnInit {
       
   }
 
- 
-  
-  
-  
   sendMessage(){
     console.log(this.currProject);
     this.firestore.collection(this.userService.currProject).add({
@@ -98,19 +96,18 @@ export class ChatPage implements OnInit {
       username: this.username,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     })
+    this.scrollToBottomOnInit();
     this.message = '';
     this.presUserArr = [];
   }
   
+  scrollToBottomOnInit() {
+    let that = this;
+    setTimeout(()=>{that.contentArea.scrollToBottom();},100)
+  }
 
-
-  
   ngOnInit() {
-    console.log(this.currProject);
-    
-    console.log(this.currProject);
-    
-
+    this.scrollToBottomOnInit();
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
