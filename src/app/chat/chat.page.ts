@@ -63,7 +63,7 @@ export class ChatPage implements OnInit {
     });
    
     this.presUserArr = [];
-    this.userService.getChatDetails().subscribe(data => 
+    this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
       {
         console.log(data);
         this.presUserArr = [];
@@ -92,8 +92,8 @@ export class ChatPage implements OnInit {
   
   sendMessage(){
     console.log(this.currProject);
-    this.firestore.collection('chattemp').add({
-      group: this.currProject,
+    this.firestore.collection(this.userService.currProject).add({
+      group: this.userService.currProject,
       message: this.message,
       username: this.username,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
