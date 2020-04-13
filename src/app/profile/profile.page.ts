@@ -3,8 +3,6 @@ import { NavController } from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import 'firebase/auth';
 import * as firebase from 'firebase';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { User } from '../models/user.model';
 import { FirebaseService } from '../services/firebase.service';
 
@@ -18,7 +16,7 @@ export class ProfilePage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private router: Router,
-    private userService: FirebaseService
+    private fireService: FirebaseService
     ) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
@@ -65,7 +63,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(data => 
+    this.fireService.getUsers().subscribe(data => 
       {
         console.log(data);
         this.userArr = data.map( user => {

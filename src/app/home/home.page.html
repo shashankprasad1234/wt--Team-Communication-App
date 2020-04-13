@@ -11,7 +11,7 @@
 
 <ion-content >
   <ion-item>
-    <ion-input type ="text" placeholder="Project Name" required></ion-input>
+    <ion-input type ="text" placeholder="Project Name" required [(ngModel)]="projname"></ion-input>
   </ion-item>
 
  <ion-item>
@@ -29,11 +29,11 @@
  <ion-item>
   <ion-input type ="text" placeholder="Tasks" [(ngModel)]="taskname"></ion-input>
   <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" [(ngModel)]="skills">
-    <ion-select-option>Skill 1</ion-select-option>
-    <ion-select-option>Skill 2</ion-select-option>
-    <ion-select-option>Skill 3</ion-select-option>
-    <ion-select-option>Skill 4</ion-select-option>
-    <ion-select-option>Skill 5</ion-select-option>
+    <ion-select-option>Machine Learning</ion-select-option>
+    <ion-select-option>Artifical Intelligence</ion-select-option>
+    <ion-select-option>Natural Language Processing</ion-select-option>
+    <ion-select-option>Network Security</ion-select-option>
+    <ion-select-option>Operating Systems</ion-select-option>
   </ion-select>
   <ion-button (click)="addtask()"><ion-icon name="add"></ion-icon></ion-button>
 </ion-item>
@@ -49,6 +49,6 @@
 
 <ion-footer>
   <div class="cenBut">
-    <ion-button style="text-align: center;">Save Project</ion-button>
+    <ion-button style="text-align: center;" (click)="saveProject()">Save Project</ion-button>
   </div>
 </ion-footer>

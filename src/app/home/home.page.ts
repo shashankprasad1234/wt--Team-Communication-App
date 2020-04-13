@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, BooleanValueAccessor } from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import { AuthenticateService } from '../services/authentication.service';
 import 'firebase/auth'
 import * as firebase from 'firebase';
+import { Project } from '../models/project.model';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,9 @@ export class HomePage {
   namelist = [];
   taskname: string = "";
   memname: string = "";
+  projname: string = "";
+  currUser = firebase.auth().currentUser;
+
 
   pages = [
     {
@@ -47,11 +52,16 @@ export class HomePage {
     }
   
   ];
+
   selectedpath: string = '';
 
-  
+  currProj = new Project();
 
-  constructor(public navCtrl: NavController, private router: Router, private authService: AuthenticateService) {
+  constructor(
+    public navCtrl: NavController,
+    private router: Router,
+    private authService: AuthenticateService,
+    private fireService: FirebaseService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -84,7 +94,21 @@ export class HomePage {
   deletetask(index)
   {
     this.tasklist.splice(index, 1);
+    this.skillslist.splice(index, 1);
   }
+  saveProject()
+  {
+
+    this.currProj.createdBy = this.currUser.displayName;
+    this.currProj.members = this.namelist;
+    this.currProj.name = this.projname;
+    this.currProj.tasks = this.tasklist;
+    this.currProj.skills = {...this.skillslist};
+    console.log(this.currProj);
+    this.fireService.createProject(this.currProj); 
+    this.router.navigate(['main/projectlist']) 
+  }
+
 
   ngOnInit(){
     console.log(this.authService.getUser());

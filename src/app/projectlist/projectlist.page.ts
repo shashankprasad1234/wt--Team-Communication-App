@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import 'firebase/auth'
 import * as firebase from 'firebase';
+import { FirebaseService } from '../services/firebase.service';
+import { Project } from '../models/project.model';
 
 
 @Component({
@@ -10,19 +12,6 @@ import * as firebase from 'firebase';
   styleUrls: ['./projectlist.page.scss'],
 })
 export class ProjectlistPage implements OnInit {
-  projects = [
-    {
-      title: 'Sample Project 1',
-      creator: 'a',
-      members: 'a, b, c, d'
-    },
-    {
-      title: 'Sample Project 2',
-      creator: 'b',
-      members: 'a, b, c'
-    }
-  ];
-
   pages = [
     {
       title: 'Home',
@@ -51,9 +40,15 @@ export class ProjectlistPage implements OnInit {
     }
   
   ];
-  selectedpath: string = '';
 
-  constructor(private router: Router) {
+  currUser = firebase.auth().currentUser
+  username = this.currUser.displayName;
+  selectedpath: string = '';
+  projArr: Array<Project> = [];
+
+  constructor(
+    private router: Router,
+    private fireService: FirebaseService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -68,12 +63,22 @@ export class ProjectlistPage implements OnInit {
     }, 5000);
   }
 
-  gototasklist(){
-    this.router.navigate(['tasklist'])
-  }
-
   ngOnInit() {
-    let self = this;
+    this.fireService.getProjects()
+    .where('members', 'array-contains', this.username)
+    .get()
+    .then(snapshot => {
+      if(snapshot.empty)
+      {
+        console.log("No Projects for this User");
+        return;
+      }
+      snapshot.forEach(project => {
+        var newProj = project.data() as Project;
+        this.projArr.push(newProj);
+      })
+    })
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         
@@ -82,7 +87,7 @@ export class ProjectlistPage implements OnInit {
         // User is signed in.
       } else {
         console.log("logged out");
-        self.router.navigate([''])
+        this.router.navigate([''])
       }
     });
   }
