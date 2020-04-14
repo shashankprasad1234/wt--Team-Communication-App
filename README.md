@@ -5,7 +5,7 @@ app(overall):
 		-Project details page
 		-add/ projects
 		-add/remove tasks
-	also:
+	also: 
 		-notification
 		-user status
 
