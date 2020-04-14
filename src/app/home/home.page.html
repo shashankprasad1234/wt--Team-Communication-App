@@ -1,5 +1,5 @@
 <ion-header >
-  <ion-toolbar class="toolbar">
+  <ion-toolbar class="toolbar" color="dark">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,8 +9,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light">
-  <hr>
+<ion-content color="primary-contrast">
+  <hr><hr>
   <ion-item class="name">
     <ion-input type ="text" placeholder="Project Name" required [(ngModel)]="projname"></ion-input>
   </ion-item>
@@ -50,6 +50,6 @@
 
 <ion-footer class="foot">
   <div class="cenBut">
-    <ion-button style="text-align: center;" (click)="saveProject()" fill="clear">Save Project</ion-button>
+    <ion-button expand="block" style="text-align: center;" color="dark" (click)="saveProject()">Save Project</ion-button>
   </div>
 </ion-footer>

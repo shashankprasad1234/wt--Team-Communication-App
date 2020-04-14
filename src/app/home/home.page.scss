@@ -17,7 +17,7 @@
   font-size: 16px;
   line-height: 22px;
 
-  color: #8c8c8c;
+  color: #ffffff;
 
   margin: 0;
 }
@@ -27,27 +27,29 @@
 }
 
 ion-content ion-toolbar {
-  --background: translucent;
+  --background: #ffffff;
 }
 
 .cenBut
 {
   text-align: center;
-  color: rgb( 0, 0,0)
+  color: rgb(0, 0, 0)
  
 }
 .toolbar {
   --background: #414554;
-  --color : #eeeeee;
+  --color : #ffffff;
 
 }
 .name {
-  --background: rgb(248, 165, 165);
+  --background: #383a3e;
+  --color: #ffffff
 }
 .mem {
-  --background: rgb(211, 238, 148);
+  --background: #ffffff;
+  
 }
 
 .task {
-  --background: rgb(230, 200, 248);
+  --background: #ffffff;
 }

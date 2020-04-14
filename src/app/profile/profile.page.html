@@ -1,48 +1,33 @@
 <ion-header>
-  <ion-toolbar color="warning">
+  <ion-toolbar color="dark">
      <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
-
-
-
-
 <ion-content *ngFor="let user of presUserArr">
   <ion-item>
-    <ion-icon size="large" name="person-circle-outline"></ion-icon>
+    <ion-icon color="dark" size="large" name="person-circle-outline"></ion-icon>
     <ion-label class="label">{{ user.username }}</ion-label>
   </ion-item>
-  <!--
-  <ion-item lines="none">
-    <ion-label color="danger">
-      <h2>Username: </h2> 
-      <h2>{{ user.username }} </h2>
-    </ion-label>
-  </ion-item>
-  -->
 
   <ion-item lines="none">
-    <ion-label><h1> User Info </h1></ion-label>
-  </ion-item>
-  <ion-item lines="none">
-    <ion-label color="primary">
+    <ion-label color="dark">
       <h2>Name: </h2> 
       <h2>{{ user.firstname}} {{user.lastname}} </h2>
     </ion-label>
   </ion-item>
 
   <ion-item lines="none">
-    <ion-label color="primary">
+    <ion-label color="dark">
       <h2>Email: </h2>
       <h2>{{ user.email}} </h2>
     </ion-label>
   </ion-item>
 
   <ion-item>
-    <ion-label color="secondary">
+    <ion-label color="dark">
       <h2>Skills: </h2>
       <h2>{{ user.skills}}</h2>
     </ion-label>
