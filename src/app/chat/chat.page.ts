@@ -18,6 +18,7 @@ export class ChatPage implements OnInit {
   currUser = firebase.auth().currentUser
   username = this.currUser.displayName;
   message: string = '';
+  currProj = this.userService.currProject;
   
   currentUser = this.username;
 
