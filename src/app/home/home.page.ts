@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 import { Project } from '../models/project.model';
 import { FirebaseService } from '../services/firebase.service';
 import { ToastController } from '@ionic/angular';
-import { exists } from 'fs';
 
 @Component({
   selector: 'app-home',
