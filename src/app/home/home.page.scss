@@ -33,4 +33,20 @@ ion-content ion-toolbar {
 .cenBut
 {
   text-align: center;
+  color: rgb( 0, 0,0)
+ 
+}
+.toolbar {
+  --background: rgb(0, 204, 255);
+
+}
+.name {
+  --background: rgb(248, 165, 165);
+}
+.mem {
+  --background: rgb(211, 238, 148);
+}
+
+.task {
+  --background: rgb(230, 200, 248);
 }

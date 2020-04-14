@@ -6,6 +6,8 @@ import 'firebase/auth'
 import * as firebase from 'firebase';
 import { Project } from '../models/project.model';
 import { FirebaseService } from '../services/firebase.service';
+import { ToastController } from '@ionic/angular';
+import { exists } from 'fs';
 
 @Component({
   selector: 'app-home',
@@ -59,6 +61,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
+    public toastController: ToastController,
     private router: Router,
     private authService: AuthenticateService,
     private fireService: FirebaseService) {
@@ -98,6 +101,19 @@ export class HomePage {
   }
   saveProject()
   {
+    if(this.projname.length == 0)
+    {
+      this.presentToast('Project Name Empty');
+    } 
+    else if(this.namelist.length == 0)
+    {
+      this.presentToast('No members added');
+    }
+    else if(this.tasklist.length == 0)
+    {
+      this.presentToast(' No tasks added');      
+    }
+    else{
 
     this.currProj.createdBy = this.currUser.displayName;
     this.currProj.members = this.namelist;
@@ -107,9 +123,19 @@ export class HomePage {
     console.log(this.currProj);
     this.fireService.createProject(this.currProj); 
     this.router.navigate(['main/projectlist']) 
+    }
   }
 
 
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      header: "Cannot Create Project :",
+      duration: 2000,
+      color: "danger"
+    });
+    toast.present();
+  }
   ngOnInit(){
     console.log(this.authService.getUser());
     let self = this;

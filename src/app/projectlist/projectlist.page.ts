@@ -72,6 +72,10 @@ export class ProjectlistPage implements OnInit {
     
     this.router.navigate(['main/chat'])
   }
+  goToDetails(projectName: string){
+    //go to project detail page
+
+  }
 
   ngOnInit() {
     this.fireService.getProjects()

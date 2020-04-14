@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,24 +9,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <ion-item>
+<ion-content color="light">
+  <hr>
+  <ion-item class="name">
     <ion-input type ="text" placeholder="Project Name" required [(ngModel)]="projname"></ion-input>
   </ion-item>
 
- <ion-item>
+ <ion-item class="mem">
   <ion-input type ="text" placeholder="Team Member Username" id="teammem" [(ngModel)]="memname"></ion-input>
-  <ion-button expand="block" (click)="addname()" ><ion-icon name="add"></ion-icon></ion-button>
+  <ion-button size="large" (click)="addname()" fill="clear"><ion-icon name="person-add-outline" color="dark"></ion-icon></ion-button>
 </ion-item>
 
- <ion-item lines="none" *ngFor="let name of namelist; let i = index">
-		<ion-button fill = "clear" (click)="deletename(i)">
-			<ion-icon name="close-circle-outline"></ion-icon>
+ <ion-item lines="none" *ngFor="let name of namelist; let i = index" class="mem">
+  {{name}}  
+  <ion-button fill = "clear" (click)="deletename(i)" size="default" slot="start">
+			<ion-icon name="person-remove-outline"></ion-icon>
     </ion-button>
-    {{name}}
 </ion-item>
 
- <ion-item>
+ <ion-item class="task">
   <ion-input type ="text" placeholder="Tasks" [(ngModel)]="taskname"></ion-input>
   <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" [(ngModel)]="skills">
     <ion-select-option>Machine Learning</ion-select-option>
@@ -35,10 +36,10 @@
     <ion-select-option>Network Security</ion-select-option>
     <ion-select-option>Operating Systems</ion-select-option>
   </ion-select>
-  <ion-button (click)="addtask()"><ion-icon name="add"></ion-icon></ion-button>
+  <ion-button size="large" (click)="addtask()" fill="clear"><ion-icon name="add" color="dark"></ion-icon></ion-button>
 </ion-item>
  
-<ion-item lines="none" *ngFor="let task of tasklist; let i = index">
+<ion-item lines="none" *ngFor="let task of tasklist; let i = index" class="task"> 
 		<ion-button fill = "clear" (click)="deletetask(i)">
 			<ion-icon name="close-circle-outline"></ion-icon>
     </ion-button>
@@ -47,8 +48,8 @@
  <!-- <ion-button expand="block" href="login" fill ="clear">Back(temp)</ion-button> -->
 </ion-content>
 
-<ion-footer>
+<ion-footer class="foot">
   <div class="cenBut">
-    <ion-button style="text-align: center;" (click)="saveProject()">Save Project</ion-button>
+    <ion-button style="text-align: center;" (click)="saveProject()" fill="clear">Save Project</ion-button>
   </div>
 </ion-footer>
