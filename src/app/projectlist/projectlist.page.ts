@@ -65,9 +65,11 @@ export class ProjectlistPage implements OnInit {
     }, 5000);
   }
 
-  goToChat(projectName: string){
+  goToChat(projectName: string, projectMembers: any[]){
     console.log(this.fireService.currProject);
     this.fireService.currProject = projectName;
+    this.fireService.currMembers = projectMembers;
+    console.log(this.fireService.currMembers)
     console.log(this.fireService.currProject);
     
     this.router.navigate(['main/chat'])

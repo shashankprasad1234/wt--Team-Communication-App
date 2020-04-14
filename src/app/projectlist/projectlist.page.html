@@ -14,7 +14,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Created By: {{ p.createdBy}}</ion-label>
-      <ion-button (click)="goToChat(p.name)" shape="round" size="default" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button>
+      <ion-button (click)="goToChat(p.name,p.members)" shape="round" size="default" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button>
     </ion-item>
     
     <ion-item lines="none"> Members:  

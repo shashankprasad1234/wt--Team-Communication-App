@@ -58,6 +58,7 @@ export class ChatPage implements OnInit {
   userArr: User[] = [];
   presUserArr: User[] = [];
   timearr: any;
+  status: string = '';
   
   constructor(public navCtrl: NavController,
     private router: Router,
@@ -71,20 +72,27 @@ export class ChatPage implements OnInit {
     this.presUserArr = [];
     this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
       {
-        console.log(data);
+        //console.log(data);
         this.presUserArr = [];
         this.userArr = data.map( user => {
-          console.log(user.payload.doc.metadata)
+          //console.log(user.payload.doc.metadata)
           const userData = user.payload.doc.data();
+          
           this.currProject = this.userService.setCurrProject();
             if(userData.group == this.currProject){
+              this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
+                userData.status = data.data().status
+             )
+              
               this.presUserArr.push(userData);
             }
-            console.log(userData)
+            console.log(userData);
+            //status = this.firestore.collection(userData.username).doc(userData.username).get().
+            //console.log(userData)
           return userData;
         })
       })
-      console.log(this.userArr);
+     // console.log(this.userArr);
     
       
   }
@@ -100,6 +108,7 @@ export class ChatPage implements OnInit {
     this.scrollToBottomOnInit();
     this.message = '';
     this.presUserArr = [];
+    
   }
   
   scrollToBottomOnInit() {

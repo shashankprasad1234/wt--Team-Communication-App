@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
 import { AuthenticateService } from '../services/authentication.service';
-
+import { FirebaseService } from '../services/firebase.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-menu',
@@ -93,14 +94,14 @@ export class MenuPage implements OnInit {
 
   logOut(){
     this.authService.logoutUser();
-    
+    this.fireSerive.updateLoginStatus(firebase.auth().currentUser.displayName,"offline");
     this.authService.setUser('');
 
     this.router.navigate(['']);
   }
 
   selectedpath ='';
-  constructor(private router:Router, private authService: AuthenticateService) {
+  constructor(private router:Router, private authService: AuthenticateService, private fireSerive: FirebaseService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });

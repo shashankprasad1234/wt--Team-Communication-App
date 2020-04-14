@@ -1,7 +1,8 @@
 {
   "name": "taskman",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

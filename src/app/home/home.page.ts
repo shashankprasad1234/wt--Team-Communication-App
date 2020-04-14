@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import { Project } from '../models/project.model';
 import { FirebaseService } from '../services/firebase.service';
 import { ToastController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -63,7 +64,8 @@ export class HomePage {
     public toastController: ToastController,
     private router: Router,
     private authService: AuthenticateService,
-    private fireService: FirebaseService) {
+    private fireService: FirebaseService,
+    private firestore: AngularFirestore) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -126,6 +128,7 @@ export class HomePage {
   }
 
 
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -136,6 +139,8 @@ export class HomePage {
     toast.present();
   }
   ngOnInit(){
+    this.fireService.updateLoginStatus(this.currUser.displayName,"online");
+    this.firestore.collection(this.currUser.displayName).doc(this.currUser.displayName).get().subscribe(data => console.log(data.data().status));
     console.log(this.authService.getUser());
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
