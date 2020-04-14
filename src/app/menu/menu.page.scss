@@ -1,5 +1,5 @@
 .active{
-    --ion-text-color: rgb(0, 0, 0);
+    --ion-text-color: var(--ion-color-dark);
     ion-icon{
         color: rgb(0, 0, 255);
     }

@@ -11,23 +11,23 @@
 
 <ion-content color="primary-contrast">
   <hr><hr>
-  <ion-item class="name">
+  <ion-item class="name"><!--not sure what color this should be... left as is-->
     <ion-input type ="text" placeholder="Project Name" required [(ngModel)]="projname"></ion-input>
   </ion-item>
 
- <ion-item class="mem">
+ <ion-item >
   <ion-input type ="text" placeholder="Team Member Username" id="teammem" [(ngModel)]="memname"></ion-input>
   <ion-button size="large" (click)="addname()" fill="clear"><ion-icon name="person-add-outline" color="dark"></ion-icon></ion-button>
 </ion-item>
 
- <ion-item lines="none" *ngFor="let name of namelist; let i = index" class="mem">
+ <ion-item lines="none" *ngFor="let name of namelist; let i = index" >
   {{name}}  
   <ion-button fill = "clear" (click)="deletename(i)" size="default" slot="start">
 			<ion-icon name="person-remove-outline"></ion-icon>
     </ion-button>
 </ion-item>
 
- <ion-item class="task">
+ <ion-item >
   <ion-input type ="text" placeholder="Tasks" [(ngModel)]="taskname"></ion-input>
   <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" [(ngModel)]="skills">
     <ion-select-option>Machine Learning</ion-select-option>
@@ -39,7 +39,7 @@
   <ion-button size="large" (click)="addtask()" fill="clear"><ion-icon name="add" color="dark"></ion-icon></ion-button>
 </ion-item>
  
-<ion-item lines="none" *ngFor="let task of tasklist; let i = index" class="task"> 
+<ion-item lines="none" *ngFor="let task of tasklist; let i = index" > 
 		<ion-button fill = "clear" (click)="deletetask(i)">
 			<ion-icon name="close-circle-outline"></ion-icon>
     </ion-button>
