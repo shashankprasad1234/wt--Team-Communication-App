@@ -74,8 +74,12 @@ export class ProjectlistPage implements OnInit {
     
     this.router.navigate(['main/chat'])
   }
+
   goToDetails(projectName: string){
     //go to project detail page
+    this.fireService.currProject = projectName;
+    
+    this.router.navigate(['main/tasklist'])
 
   }
 

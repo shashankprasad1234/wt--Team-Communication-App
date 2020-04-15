@@ -44,25 +44,26 @@ export class TasklistPage implements OnInit {
   
   ];
 
-/*
+
+  gotoChat(){
+    this.router.navigate(['main/chat']);
+  }
+
   constructor(
     private router: Router,
     private fireService: FirebaseService) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
-  }
+    }
 
-  goToChat(projectName: string, projectMembers: any[]){
-    console.log(this.fireService.currProject);
-    this.fireService.currProject = projectName;
-    this.fireService.currMembers = projectMembers;
-    console.log(this.fireService.currMembers)
-    console.log(this.fireService.currProject);
+  // goToChat(projectName: string, projectMembers: any[]){
+  //   console.log(this.fireService.currProject);
+  //   this.fireService.currProject = projectName;
+  //   this.fireService.currMembers = projectMembers;
+  //   console.log(this.fireService.currMembers)
+  //   console.log(this.fireService.currProject);
     
-    this.router.navigate(['main/chat'])
-  }
-*/
+  //   this.router.navigate(['main/chat'])
+  // }
+
   ngOnInit() {
   }
 

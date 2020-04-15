@@ -8,13 +8,13 @@
 </ion-header>
 
 <ion-content *ngFor="let p of projArr; let i1 = index" color="light">
-  <div class="borders" (click)="goToDetails(p.name)">
+  <div class="borders">
     <ion-item lines="none">
       <ion-label color="danger" style="white-space: normal;"><h1>{{i1 + 1}}) {{ p.name }}</h1></ion-label>
     </ion-item>
     <ion-item>
       <ion-label>Created By: {{ p.createdBy}}</ion-label>
-      <ion-button (click)="goToChat(p.name,p.members)" shape="round" size="default" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button>
+      <ion-button (click)="goToChat(p.name,p.members)" shape="round" size="default" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button><ion-button (click)="goToDetails(p.name)" shape="round" size="default" color="dark"><ion-icon name="folder"></ion-icon></ion-button>
     </ion-item>
     
     <ion-item lines="none"> Members:  

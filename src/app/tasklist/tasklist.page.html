@@ -11,7 +11,7 @@
 
   <ion-item lines="none">
     <ion-label color="danger" style="white-space: normal;"><h1> Project Name<!--{{ p.name }}--></h1></ion-label>
-    <ion-button  shape="round" size="large" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button><!--(click)="goToChat(p.name,p.members)"-->
+    <ion-button  (click)="gotoChat()" shape="round" size="large" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button><!--(click)="goToChat(p.name,p.members)"-->
   </ion-item>
   <ion-item>
     <ion-label color="secondary"><h1>Members:</h1></ion-label>
