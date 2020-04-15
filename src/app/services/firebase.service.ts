@@ -15,7 +15,7 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore) { }
   currProject: string = '';
   thisUser: User;
-  currMembers: any[];
+  currMembers: any[];z
 
   getUsers() {
     return this.firestore.collection('users').snapshotChanges();

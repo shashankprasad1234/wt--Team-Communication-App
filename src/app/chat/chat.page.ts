@@ -68,7 +68,7 @@ export class ChatPage implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
-   
+   this.scrollToBottomOnInit();
     this.presUserArr = [];
     this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
       {
@@ -117,7 +117,7 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    this.scrollToBottomOnInit();
+    //this.scrollToBottomOnInit();
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
