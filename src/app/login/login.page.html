@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-toolbar color="danger" >
-    <ion-title slot="start">Taskman</ion-title>
+    <ion-title slot="start">TaskMan</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,11 +10,11 @@
 <hr>
 <ion-content padding color="primary-contrast">
   <ion-item padding color="light">
-    <ion-label position="floating" >Enter Email</ion-label>
+    <ion-label position="floating" >Email</ion-label>
     <ion-input id="username" type="email" [(ngModel)]="user"></ion-input>
   </ion-item>
   <ion-item padding color="light">
-    <ion-label position="floating">Enter Password</ion-label>
+    <ion-label position="floating">Password</ion-label>
     <ion-input id="password" type="password" minlength="8" [(ngModel)]="password"></ion-input>
   </ion-item>
   <hr>
@@ -24,17 +24,6 @@
   <ion-button id="login" expand="block" (click)="loginUser()" >Login</ion-button>
   
   <ion-button id="signup" color="success" expand="block"  (click)="gotosignuppage()">Sign Up</ion-button>
-  <hr>
- <hr>
- <hr>
- <hr>
- <hr>
- <hr>
- <hr>
- <hr>
-  
-
-  
 </ion-content>
 <ion-footer>
   <ion-button expand="block" href="aboutus" fill ="clear">About The Project</ion-button>
