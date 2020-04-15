@@ -63,6 +63,7 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.getUsers().subscribe(data => 
       {
         console.log(data);

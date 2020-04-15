@@ -80,6 +80,7 @@ export class ProjectlistPage implements OnInit {
   }
 
   ngOnInit() {
+    this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.getProjects()
     .where('members', 'array-contains', this.username)
     .get()

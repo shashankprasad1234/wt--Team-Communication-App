@@ -68,6 +68,8 @@ export class ChatPage implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
+    
+
    this.scrollToBottomOnInit();
     this.presUserArr = [];
     this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
@@ -86,7 +88,7 @@ export class ChatPage implements OnInit {
               
               this.presUserArr.push(userData);
             }
-            console.log(userData);
+            //console.log(userData);
             //status = this.firestore.collection(userData.username).doc(userData.username).get().
             //console.log(userData)
           return userData;
@@ -117,13 +119,13 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    //this.scrollToBottomOnInit();
+    this.userService.updateLoginStatus(this.currUser.displayName,"online");
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         
         console.log("logged in");
-        
+        //self.scrollToBottomOnInit();
         // User is signed in.
       } else {
         console.log("logged out");
