@@ -32,6 +32,10 @@ const routes: Routes = [
       loadChildren: () => import('../chat/chat.module').then( m => m.ChatPageModule)
     },
     {
+      path: 'tasklist',
+      loadChildren: () => import('../tasklist/tasklist.module').then( m => m.TasklistPageModule)
+    },
+    {
       path: 'profile',
       loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule)
     }

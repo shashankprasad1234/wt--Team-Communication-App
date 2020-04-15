@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Project Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item lines="none">
+    <ion-label color="danger" style="white-space: normal;"><h1> Project Name<!--{{ p.name }}--></h1></ion-label>
+    <ion-button  shape="round" size="large" color="dark"><ion-icon name="chatbox-ellipses"></ion-icon></ion-button><!--(click)="goToChat(p.name,p.members)"-->
+  </ion-item>
+  <ion-item>
+    <ion-label color="secondary"><h1>Members:</h1></ion-label>
+    <ion-input type ="text" placeholder="Add Member" ></ion-input>
+    <ion-button  shape="round" size="default" color="dark"><ion-icon name="person-add"></ion-icon></ion-button>
+  </ion-item>
+  
+  <ion-item class="borders" > <!-- *ngFor="let mem of p.members" add in ion-item tag-->
+    <ion-button  shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
+    <ion-label> member<!--{{ mem }}--></ion-label>
+  </ion-item>
+  <ion-item class="borders"> <!--Temp item-->
+    <ion-button  shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
+    <ion-label> member2<!--{{ mem }}--></ion-label>
+  </ion-item>
+
+  <ion-item class="borders">
+    <ion-label color="secondary"><h1>Tasks</h1></ion-label>
+    <ion-button  shape="round" size="default" color="secondary">Assign</ion-button>
+  </ion-item>
+
+  <ion-item >
+    <ion-input type ="text" placeholder="Add Task" ></ion-input><!--[(ngModel)]="taskname"-->
+    <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" ><!--[(ngModel)]="skills"-->
+      <ion-select-option>Machine Learning</ion-select-option>
+      <ion-select-option>Artifical Intelligence</ion-select-option>
+      <ion-select-option>Natural Language Processing</ion-select-option>
+      <ion-select-option>Network Security</ion-select-option>
+      <ion-select-option>Operating Systems</ion-select-option>
+    </ion-select>
+    <ion-button  shape="round" color="dark"><ion-icon name="add"></ion-icon></ion-button>
+  </ion-item>
+
+
+
+
+  <div class="borders"><!--*ngFor="let task of p.tasks; let i3 = index"-->
+  <ion-item lines="none" >
+    <ion-label ><!-- {{i3 + 1}}: {{task}} --> do task</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label > member:</ion-label>
+    <ion-label > status:</ion-label>
+  </ion-item>
+</div>
+</ion-content>
+ 
