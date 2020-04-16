@@ -3,18 +3,16 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/models/user.model';
 import { Project } from '../models/project.model';
 
-import * as firebase from 'firebase';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
   constructor(private firestore: AngularFirestore) { }
-  currProject: string = '';
+  currProject: Project;
+  currUserProjects: Array<Project> = [];
   thisUser: User;
+
   currMembers: any[];
   messagesLimit = 20;
   inProjectPage = false;
@@ -48,29 +46,6 @@ export class FirebaseService {
       this.firestore.collection(user).doc(user).set({
         user: user,
         status: status
-      });
-     
-  
-
-  }
-
-
-
-  setCurrProject() {
-    return this.currProject;
-
-  }
-  getUser(username: string) {
-    this.firestore.collection('users').ref
-      .where('username', '==', username)
-      .limit(1)
-      .get()
-      .then(snapshot => {
-        if (snapshot.empty) {
-          console.log("Invalid User")
-          return this.thisUser;
-        }
-        return snapshot[0] as User;
       });
   }
 }

@@ -66,64 +66,23 @@ export class ChatPage implements OnInit {
     private router: Router,
     private firestore: AngularFirestore,
     private userService: FirebaseService,
-    public _zone: NgZone) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
-    //this.scrollval();
-   this.scrollToBottomOnInit();
-   this.userService.alreadySeen = this.presUserArr;
-    this.presUserArr = [];
-    this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
-      {
-        //console.log(data);
-        this.presUserArr = [];
-        this.userArr = data.reverse().map( user => {
-          //console.log(user.payload.doc.metadata)
-          const userData = user.payload.doc.data();
-          
-          this.currProject = this.userService.setCurrProject();
-            if(userData.group == this.currProject){
-              this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
-                userData.status = data.data().status
-             )
-             if(this.userService.alreadySeen.includes(userData) == false){
-               //console.log(userData)
-              this.presUserArr.push(userData);
-             }
-              
-              
-            }
-            //console.log(userData);
-            //status = this.firestore.collection(userData.username).doc(userData.username).get().
-            //console.log(userData)
-          return userData;
-        })
-      })
-     // console.log(this.userArr);
-     this.userService.inChatPage = true;
-     this.updateLoginStatus();
-    
-      
-  }
+    public _zone: NgZone) {  }
 
   sendMessage(){
     console.log(this.currProject);
-    this.firestore.collection(this.userService.currProject).add({
-      group: this.userService.currProject,
+    this.firestore.collection(this.userService.currProject.name).add({
+      group: this.userService.currProject.name,
       message: this.message,
       username: this.username,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     })
     this.scrollToBottomOnInit();
     this.message = '';
-    //this.presUserArr = [];
     
   }
   
   scrollToBottomOnInit() {
-    let that = this;
-    setTimeout(()=>{that.contentArea.scrollToBottom(0);},100)
+    setTimeout(()=>{this.contentArea.scrollToBottom(0);}, 10000)
   }
 
   updateLoginStatus(){
@@ -144,11 +103,39 @@ export class ChatPage implements OnInit {
 
   }
 
-  scrollval(){
-    
-  }
-
   ngOnInit() {
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.selectedpath = event.url;
+    });
+
+    this.userService.getChatDetails(this.userService.currProject.name).subscribe(data => 
+      {
+        //console.log(data);
+        this.presUserArr = [];
+        this.userArr = data.reverse().map( user => {
+          //console.log(user.payload.doc.metadata)
+          const userData = user.payload.doc.data();
+          
+          this.currProject = this.userService.currProject.name;
+            if(userData.group == this.currProject){
+              this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
+                userData.status = data.data().status
+             )
+             if(this.userService.alreadySeen.includes(userData) == false){
+               //console.log(userData)
+              this.presUserArr.push(userData);
+             } 
+            }
+          return userData;
+        })
+      })
+
+     this.userService.inChatPage = true;
+     this.updateLoginStatus();   
+    
+    this.scrollToBottomOnInit();
+    this.userService.alreadySeen = this.presUserArr;
+    this.presUserArr = [];
     this.userService.inProjectPage = false;
     
     this.scrollToBottomOnInit();

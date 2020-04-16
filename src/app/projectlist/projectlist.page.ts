@@ -4,8 +4,6 @@ import 'firebase/auth'
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
 import { Project } from '../models/project.model';
-import { ChatPageModule } from '../chat/chat.module';
-import { ChatPage } from '../chat/chat.page';
 
 
 @Component({
@@ -50,34 +48,7 @@ export class ProjectlistPage implements OnInit {
 
   constructor(
     private router: Router,
-    private fireService: FirebaseService) {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
-    this.fireService.getProjects()
-    .where('members', 'array-contains', this.username)
-    .get()
-    .then(snapshot => {
-      
-      if(snapshot.empty)
-      {
-        console.log("No Projects for this User");
-        return;
-      }
-      snapshot.forEach(project => {
-        var newProj = project.data() as Project;
-        if(this.projArr.includes(newProj) == false){
-          this.projArr.push(newProj);
-        }
-        
-      })
-    })
-    this.fireService.inProjectPage = true;
-    this.getProj()
-    
-    
-    // this.getProj();
-   }
+    private fireService: FirebaseService) { }
 
   doRefresh(event) {
     console.log('Begin async operation');
@@ -88,20 +59,28 @@ export class ProjectlistPage implements OnInit {
     }, 5000);
   }
 
-  goToChat(projectName: string, projectMembers: any[]){
+  goToChat(projectName: string){
+    for(var index in this.fireService.currUserProjects)
+    {
+      if(this.fireService.currUserProjects[index].name == projectName)
+      {
+        this.fireService.currProject = this.fireService.currUserProjects[index];
+      }
+    }
     console.log(this.fireService.currProject);
-    this.fireService.currProject = projectName;
-    this.fireService.currMembers = projectMembers;
-    console.log(this.fireService.currMembers)
-    console.log(this.fireService.currProject);
-    
     this.router.navigate(['main/chat'])
   }
 
   goToDetails(projectName: string){
     //go to project detail page
-    this.fireService.currProject = projectName;
-    
+    for(var index in this.fireService.currUserProjects)
+    {
+      if(this.fireService.currUserProjects[index].name == projectName)
+      {
+        this.fireService.currProject = this.fireService.currUserProjects[index];
+      }
+    }
+    console.log(this.fireService.currProject);
     this.router.navigate(['main/tasklist'])
 
   }
@@ -118,13 +97,11 @@ getProj(){
     snapshot.forEach(project => {
       var newProj = project.data() as Project;
       if(this.projArr.includes(newProj) == false){
+        this.fireService.currUserProjects.push(newProj);
         this.projArr.push(newProj);
       }
-      
     })
   })
-
-    console.log(10);
     if(this.fireService.inProjectPage == true){
       setTimeout(() => {
         console.log('Projectlist page periodic refresh');
@@ -140,20 +117,12 @@ getProj(){
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.inChatPage = false;
     
-    // this.fireService.getProjects()
-    // .where('members', 'array-contains', this.username)
-    // .get()
-    // .then(snapshot => {
-    //   if(snapshot.empty)
-    //   {
-    //     console.log("No Projects for this User");
-    //     return;
-    //   }
-    //   snapshot.forEach(project => {
-    //     var newProj = project.data() as Project;
-    //     this.projArr.push(newProj);
-    //   })
-    // })
+    this.router.events.subscribe((event: RouterEvent) => {
+      this.selectedpath = event.url;
+    });
+
+    this.fireService.inProjectPage = true;
+    this.getProj()
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

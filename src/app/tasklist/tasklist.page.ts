@@ -54,6 +54,10 @@ export class TasklistPage implements OnInit {
     private fireService: FirebaseService) {
     }
 
+    currProj = this.fireService.currProject;
+    currUser = firebase.auth().currentUser
+    username = this.currUser.displayName;
+
   // goToChat(projectName: string, projectMembers: any[]){
   //   console.log(this.fireService.currProject);
   //   this.fireService.currProject = projectName;
