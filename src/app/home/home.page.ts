@@ -20,6 +20,8 @@ export class HomePage {
   tasklist = [];
   skillslist = [];
   namelist = [];
+  assignee = [];
+  taskStatus = [];
   taskname: string = "";
   memname: string = "";
   projname: string = "";
@@ -92,6 +94,8 @@ export class HomePage {
       this.taskname = "";
     }
     this.skillslist.push(this.skills);
+    this.assignee.push("Not Assigned");
+    this.taskStatus.push("Incomplete");
     this.skills = [];
   }
 

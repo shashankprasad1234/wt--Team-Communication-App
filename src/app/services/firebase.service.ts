@@ -65,7 +65,9 @@ export class FirebaseService {
           name: updatedProj.name,
           members: updatedProj.members,
           skills: {...updatedProj.skills},
-          tasks: updatedProj.tasks
+          tasks: updatedProj.tasks,
+          taskStatus: updatedProj.taskStatus,
+          assignee: updatedProj. assignee
         });
       })
       

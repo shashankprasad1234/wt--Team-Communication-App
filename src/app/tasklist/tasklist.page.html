@@ -48,9 +48,12 @@
       <ion-button fill = "clear" (click)="deleteTask(i)">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
-      <ion-label >{{task}} [{{currProj.skills[i]}}]</ion-label>
-      <ion-label>Assigned: </ion-label>
-      <ion-label>Status: </ion-label>
+      <ion-label color="secondary">{{task}} [{{currProj.skills[i]}}]</ion-label>
+      <ion-label color="primary">{{currProj.assignee[i]}}</ion-label>
+      <ion-label color="danger" *ngIf="currProj.taskStatus[i] == 'Incomplete'">{{currProj.taskStatus[i]}} </ion-label>
+      <ion-button (click)="changeStatus(i)" *ngIf="currProj.taskStatus[i] == 'Incomplete'" shape="round" size="default" color="success">Complete</ion-button>
+      <ion-label color="success" *ngIf="currProj.taskStatus[i] == 'Complete'">{{currProj.taskStatus[i]}} </ion-label>
+      <ion-button (click)="changeStatus(i)" *ngIf="currProj.taskStatus[i] == 'Complete'" shape="round" size="default" color="danger">Incomplete</ion-button>
     </ion-item>
   </div>
 </ion-content>

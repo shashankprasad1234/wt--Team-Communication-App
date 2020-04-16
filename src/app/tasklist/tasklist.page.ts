@@ -78,6 +78,8 @@ export class TasklistPage implements OnInit {
     let updatedProj = new Project;
     updatedProj = this.currProj;
     updatedProj.tasks.push(this.taskname);
+    updatedProj.taskStatus.push("Incomplete");
+    updatedProj.assignee.push("Not Assigned");
     console.log(updatedProj);
     var tempArr = Object.values(updatedProj.skills);
     tempArr.push(this.skills);
@@ -92,11 +94,56 @@ export class TasklistPage implements OnInit {
     let updatedProj = new Project;
     updatedProj = this.currProj;
     updatedProj.tasks.splice(ind, 1);
+    updatedProj.assignee.splice(ind, 1);
+    updatedProj.taskStatus.splice(ind, 1);
     var tempArr = Object.values(updatedProj.skills);
     tempArr.splice(ind, 1);
     updatedProj.skills = {...tempArr};
     this.currProj = updatedProj;
     this.fireService.updateProj(updatedProj);
+  }
+
+  changeStatus(ind: number)
+  {
+    console.log(this.currProj);
+    let updatedProj = new Project;
+    updatedProj = this.currProj;
+    if(updatedProj.taskStatus[ind] == "Complete")
+    {
+      updatedProj.taskStatus[ind] = "Incomplete";
+      updatedProj.assignee.unshift(this.currProj.assignee[ind]);
+      updatedProj.taskStatus.unshift(this.currProj.taskStatus[ind]);
+      updatedProj.tasks.unshift(this.currProj.tasks[ind]);
+      updatedProj.taskStatus.splice(ind + 1, 1);
+      updatedProj.assignee.splice(ind + 1, 1);
+      updatedProj.tasks.splice(ind + 1, 1);
+      var tempArr = Object.values(updatedProj.skills);
+      var tempToAdd = tempArr[ind];
+      tempArr.unshift(tempToAdd);
+      tempArr.splice(ind + 1, 1);
+      updatedProj.skills = {...tempArr};
+      this.currProj = updatedProj;
+      console.log(updatedProj);
+      this.fireService.updateProj(updatedProj);
+    }
+    else
+    {
+      updatedProj.taskStatus[ind] = "Complete";
+      updatedProj.assignee.push(this.currProj.assignee[ind]);
+      updatedProj.taskStatus.push(this.currProj.taskStatus[ind]);
+      updatedProj.tasks.push(this.currProj.tasks[ind]);
+      updatedProj.taskStatus.splice(ind, 1);
+      updatedProj.assignee.splice(ind, 1);
+      updatedProj.tasks.splice(ind, 1);
+      var tempArr = Object.values(updatedProj.skills);
+      var tempToAdd = tempArr[ind];
+      tempArr.push(tempToAdd);
+      tempArr.splice(ind, 1);
+      updatedProj.skills = {...tempArr};
+      this.currProj = updatedProj;
+      console.log(updatedProj);
+      this.fireService.updateProj(updatedProj);
+    }
   }
 
 
@@ -114,6 +161,7 @@ export class TasklistPage implements OnInit {
     username = this.currUser.displayName;
 
   ngOnInit() {
+    console.log(this.currProj);
     this.fireService.inProjectPage = false;
     this.fireService.inChatPage = false;
   }
