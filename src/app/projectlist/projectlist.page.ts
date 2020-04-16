@@ -52,6 +52,21 @@ export class ProjectlistPage implements OnInit {
       this.router.events.subscribe((event: RouterEvent) => {
         this.selectedpath = event.url;
       });
+      this.fireService.getProjects().where('members', 'array-contains', this.username).get().then(snapshot => {
+        this.projArr = [];
+        if(snapshot.empty)
+        {
+          console.log("No Projects for this User");
+          return;
+        }
+        snapshot.forEach(project => {
+          var newProj = project.data() as Project;
+          if(this.projArr.includes(newProj) == false){
+            this.fireService.currUserProjects.push(newProj);
+            this.projArr.push(newProj);
+          }
+        })
+      })
   
       this.fireService.inProjectPage = true;
       this.getProj()
@@ -112,7 +127,7 @@ getProj(){
       setTimeout(() => {
         console.log('Projectlist page periodic refresh');
         this.getProj();
-      }, 60000);
+      }, 5000);
     }else{
       console.log(this.fireService.inProjectPage);
     }
