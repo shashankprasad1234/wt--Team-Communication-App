@@ -36,6 +36,11 @@ export class FirebaseService {
     return chatRef.snapshotChanges();
   }
 
+  getUserData(){
+    let userRef = this.firestore.collection<any>('users');
+    return userRef.snapshotChanges();
+  }
+
   createProject(project: Project) {
     return this.firestore.collection('projects').add({ ...project });
   }

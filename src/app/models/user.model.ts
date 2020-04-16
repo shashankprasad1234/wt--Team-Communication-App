@@ -5,4 +5,5 @@ export interface User {
     gender: string;
     skills: Array<any>;
     status: string;
+    email: string;
 }
