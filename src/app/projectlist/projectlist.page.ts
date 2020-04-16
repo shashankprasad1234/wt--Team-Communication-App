@@ -127,9 +127,9 @@ getProj(){
     console.log(10);
     if(this.fireService.inProjectPage == true){
       setTimeout(() => {
-        console.log('Async operation has ended');
+        console.log('Projectlist page periodic refresh');
         this.getProj();
-      }, 5000);
+      }, 60000);
     }else{
       console.log(this.fireService.inProjectPage);
     }
@@ -138,6 +138,7 @@ getProj(){
 
   ngOnInit() {
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
+    this.fireService.inChatPage = false;
     
     // this.fireService.getProjects()
     // .where('members', 'array-contains', this.username)

@@ -101,6 +101,8 @@ export class ChatPage implements OnInit {
         })
       })
      // console.log(this.userArr);
+     this.userService.inChatPage = true;
+     this.updateLoginStatus();
     
       
   }
@@ -124,7 +126,23 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{that.contentArea.scrollToBottom(0);},100)
   }
 
-  
+  updateLoginStatus(){
+    for(let i=0;i<this.presUserArr.length;i++){
+      this.firestore.collection(this.presUserArr[i].username).doc(this.presUserArr[i].username).get().subscribe(data => 
+        this.presUserArr[i].status = data.data().status)
+    }
+
+    console.log(10);
+    if(this.userService.inChatPage == true){
+      setTimeout(() => {
+        console.log('Chat periodic refresh');
+        this.updateLoginStatus();
+      }, 60000);
+    }else{
+      console.log(this.userService.inChatPage);
+    }
+
+  }
 
   scrollval(){
     

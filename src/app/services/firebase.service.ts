@@ -19,7 +19,8 @@ export class FirebaseService {
   messagesLimit = 20;
   inProjectPage = false;
   alreadySeen: User[] = [];
-
+  inChatPage = false;
+  
   getUsers() {
     return this.firestore.collection('users').snapshotChanges();
   }

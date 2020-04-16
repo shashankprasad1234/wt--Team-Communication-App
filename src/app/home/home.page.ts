@@ -140,6 +140,7 @@ export class HomePage {
   }
   ngOnInit(){
     this.fireService.inProjectPage = false;
+    this.fireService.inChatPage = false;
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.firestore.collection(this.currUser.displayName).doc(this.currUser.displayName).get().subscribe(data => console.log(data.data().status));
     console.log(this.authService.getUser());
