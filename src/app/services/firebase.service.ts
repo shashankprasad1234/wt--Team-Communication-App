@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/models/user.model';
 import { Project } from '../models/project.model';
@@ -33,7 +33,7 @@ export class FirebaseService {
 
   getChatDetails(projectname: string) {
     let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at','desc'));
-    return chatRef.snapshotChanges()this.getProj();
+    return chatRef.snapshotChanges();
   }
 
   createProject(project: Project) {
