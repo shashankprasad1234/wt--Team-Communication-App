@@ -66,7 +66,32 @@ export class ChatPage implements OnInit {
     private router: Router,
     private firestore: AngularFirestore,
     private userService: FirebaseService,
-    public _zone: NgZone) {  }
+    public _zone: NgZone) { 
+      this.router.events.subscribe((event: RouterEvent) => {
+        this.selectedpath = event.url;
+      });
+      this.userService.getChatDetails(this.userService.currProject.name).subscribe(data => 
+        {
+          //console.log(data);
+          this.presUserArr = [];
+          this.userArr = data.reverse().map( user => {
+            //console.log(user.payload.doc.metadata)
+            const userData = user.payload.doc.data();
+            
+            this.currProject = this.userService.currProject.name;
+              if(userData.group == this.currProject){
+                this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
+                  userData.status = data.data().status
+               )
+               if(this.userService.alreadySeen.includes(userData) == false){
+                 //console.log(userData)
+                this.presUserArr.push(userData);
+               } 
+              }
+            return userData;
+          })
+        })
+     }
 
   sendMessage(){
     console.log(this.currProject);
@@ -104,34 +129,9 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
 
-    this.userService.getChatDetails(this.userService.currProject.name).subscribe(data => 
-      {
-        //console.log(data);
-        this.presUserArr = [];
-        this.userArr = data.reverse().map( user => {
-          //console.log(user.payload.doc.metadata)
-          const userData = user.payload.doc.data();
-          
-          this.currProject = this.userService.currProject.name;
-            if(userData.group == this.currProject){
-              this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
-                userData.status = data.data().status
-             )
-             if(this.userService.alreadySeen.includes(userData) == false){
-               //console.log(userData)
-              this.presUserArr.push(userData);
-             } 
-            }
-          return userData;
-        })
-      })
-
-     this.userService.inChatPage = true;
-     this.updateLoginStatus();   
+    this.userService.inChatPage = true;
+    this.updateLoginStatus();   
     
     this.scrollToBottomOnInit();
     this.userService.alreadySeen = this.presUserArr;

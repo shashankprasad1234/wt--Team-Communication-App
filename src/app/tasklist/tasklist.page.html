@@ -19,7 +19,7 @@
   </ion-item>
   
   <ion-item lines = "none" *ngFor="let mem of currProj.members" >
-    <ion-button *ngIf="currProj.createdBy == username || mem == username;" shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
+    <ion-button *ngIf="currProj.createdBy == username || mem == username;" (click)="removeUser()"shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
     <ion-label> {{mem}}</ion-label>
   </ion-item>
 </ion-content>
