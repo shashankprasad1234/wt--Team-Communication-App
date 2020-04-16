@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, BooleanValueAccessor } from '@ionic/angular';
+import { Component} from '@angular/core';
+import { NavController} from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import { AuthenticateService } from '../services/authentication.service';
 import 'firebase/auth'
@@ -128,6 +128,8 @@ export class HomePage {
     this.currProj.name = this.projname;
     this.currProj.tasks = this.tasklist;
     this.currProj.skills = {...this.skillslist};
+    this.currProj.taskStatus = this.taskStatus;
+    this.currProj.assignee = this.assignee;
     console.log(this.currProj);
     this.fireService.createProject(this.currProj); 
     this.router.navigate(['main/projectlist']) 

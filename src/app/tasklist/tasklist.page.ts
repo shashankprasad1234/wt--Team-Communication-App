@@ -3,7 +3,7 @@ import 'firebase/auth'
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
 import { Project } from '../models/project.model';
-import { Router, RouterEvent } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
