@@ -65,6 +65,7 @@ export class TasklistPage implements OnInit {
   // }
 
   ngOnInit() {
+    this.fireService.inProjectPage = false;
   }
 
 }

@@ -10,7 +10,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="black">
+<!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)" position="top">
+  <ion-infinite-scroll-content
+    loadingSpinner="crescent"
+    loadingText="Loading more data...">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll> -->
+
+<ion-content  id="m" (ionScrollEnd)="scrollval($event)"  color="black" [scrollEvents]="true"  >
   <ion-grid>
     <ion-row *ngFor="let user of presUserArr">
       <ion-col  offset="3" size="9" *ngIf="currentUser === user.username" class="message my-message"> 
@@ -28,6 +35,7 @@
   </ion-grid>
 </ion-content>
   
+
 
 <ion-footer>
   <ion-toolbar color="light">

@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { User } from '../models/user.model';
 
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.page.html',
@@ -57,6 +58,7 @@ export class ChatPage implements OnInit {
   new_presUserArr : User[] = []
   userArr: User[] = [];
   presUserArr: User[] = [];
+  
   timearr: any;
   status: string = '';
   
@@ -68,13 +70,15 @@ export class ChatPage implements OnInit {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
+    //this.scrollval();
    this.scrollToBottomOnInit();
+   this.userService.alreadySeen = this.presUserArr;
     this.presUserArr = [];
     this.userService.getChatDetails(this.userService.currProject).subscribe(data => 
       {
         //console.log(data);
         this.presUserArr = [];
-        this.userArr = data.map( user => {
+        this.userArr = data.reverse().map( user => {
           //console.log(user.payload.doc.metadata)
           const userData = user.payload.doc.data();
           
@@ -83,8 +87,12 @@ export class ChatPage implements OnInit {
               this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
                 userData.status = data.data().status
              )
-              
+             if(this.userService.alreadySeen.includes(userData) == false){
+               //console.log(userData)
               this.presUserArr.push(userData);
+             }
+              
+              
             }
             //console.log(userData);
             //status = this.firestore.collection(userData.username).doc(userData.username).get().
@@ -107,16 +115,26 @@ export class ChatPage implements OnInit {
     })
     this.scrollToBottomOnInit();
     this.message = '';
-    this.presUserArr = [];
+    //this.presUserArr = [];
     
   }
   
   scrollToBottomOnInit() {
     let that = this;
-    setTimeout(()=>{that.contentArea.scrollToBottom();},100)
+    setTimeout(()=>{that.contentArea.scrollToBottom(0);},100)
+  }
+
+  
+
+  scrollval(){
+    
   }
 
   ngOnInit() {
+    this.userService.inProjectPage = false;
+    
+    this.scrollToBottomOnInit();
+    
     this.userService.updateLoginStatus(this.currUser.displayName,"online");
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {

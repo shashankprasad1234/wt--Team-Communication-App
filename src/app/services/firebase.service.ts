@@ -15,7 +15,10 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore) { }
   currProject: string = '';
   thisUser: User;
-  currMembers: any[];z
+  currMembers: any[];
+  messagesLimit = 20;
+  inProjectPage = false;
+  alreadySeen: User[] = [];
 
   getUsers() {
     return this.firestore.collection('users').snapshotChanges();
@@ -30,7 +33,7 @@ export class FirebaseService {
   }
 
   getChatDetails(projectname: string) {
-    let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at'));
+    let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at','desc'));
     return chatRef.snapshotChanges()
   }
 
