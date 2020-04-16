@@ -58,16 +58,6 @@ export class TasklistPage implements OnInit {
     currUser = firebase.auth().currentUser
     username = this.currUser.displayName;
 
-  // goToChat(projectName: string, projectMembers: any[]){
-  //   console.log(this.fireService.currProject);
-  //   this.fireService.currProject = projectName;
-  //   this.fireService.currMembers = projectMembers;
-  //   console.log(this.fireService.currMembers)
-  //   console.log(this.fireService.currProject);
-    
-  //   this.router.navigate(['main/chat'])
-  // }
-
   ngOnInit() {
     this.fireService.inProjectPage = false;
     this.fireService.inChatPage = false;

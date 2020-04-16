@@ -78,11 +78,10 @@ export class ProjectlistPage implements OnInit {
       if(this.fireService.currUserProjects[index].name == projectName)
       {
         this.fireService.currProject = this.fireService.currUserProjects[index];
+        console.log(this.fireService.currProject);
+        this.router.navigate(['main/tasklist'])
       }
     }
-    console.log(this.fireService.currProject);
-    this.router.navigate(['main/tasklist'])
-
   }
 
 getProj(){
