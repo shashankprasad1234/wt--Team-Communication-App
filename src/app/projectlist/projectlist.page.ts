@@ -48,7 +48,14 @@ export class ProjectlistPage implements OnInit {
 
   constructor(
     private router: Router,
-    private fireService: FirebaseService) { }
+    private fireService: FirebaseService) { 
+      this.router.events.subscribe((event: RouterEvent) => {
+        this.selectedpath = event.url;
+      });
+  
+      this.fireService.inProjectPage = true;
+      this.getProj()
+    }
 
   doRefresh(event) {
     console.log('Begin async operation');
@@ -116,12 +123,7 @@ getProj(){
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.inChatPage = false;
     
-    this.router.events.subscribe((event: RouterEvent) => {
-      this.selectedpath = event.url;
-    });
 
-    this.fireService.inProjectPage = true;
-    this.getProj()
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
