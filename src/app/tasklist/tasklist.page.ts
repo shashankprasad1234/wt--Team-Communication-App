@@ -3,8 +3,6 @@ import 'firebase/auth'
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
 import { Project } from '../models/project.model';
-import { ChatPageModule } from '../chat/chat.module';
-import { ChatPage } from '../chat/chat.page';
 import { Router, RouterEvent } from '@angular/router';
 
 
@@ -43,6 +41,19 @@ export class TasklistPage implements OnInit {
     }
   
   ];
+
+  removeUser(username: string)
+  {
+    let updatedProj = new Project;
+    updatedProj = this.currProj;
+    const index = updatedProj.members.indexOf(username, 0);
+    if (index > -1)
+    {
+      updatedProj.members.splice(index, 1)
+    }
+    this.fireService.updateProj(updatedProj);
+    this.router.navigate(['main/home']);
+  }
 
 
   gotoChat(){

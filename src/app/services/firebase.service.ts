@@ -33,7 +33,7 @@ export class FirebaseService {
 
   getChatDetails(projectname: string) {
     let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at','desc'));
-    return chatRef.snapshotChanges()
+    return chatRef.snapshotChanges()this.getProj();
   }
 
   createProject(project: Project) {
@@ -47,5 +47,27 @@ export class FirebaseService {
         user: user,
         status: status
       });
+  }
+
+  updateProj(updatedProj: Project)
+  {
+    let that = this;
+    this.firestore.collection("projects").ref
+      .where("name", "==", updatedProj.name)
+      .limit(1)
+      .get()
+      .then(function(snap)
+      {
+        var projId = snap.docs[0].id;
+        console.log(projId);
+        that.firestore.collection("projects").doc(projId).set({
+          createdBy: updatedProj.createdBy,
+          name: updatedProj.name,
+          members: updatedProj.members,
+          skills: {...updatedProj.skills},
+          tasks: updatedProj.tasks
+        });
+      })
+      
   }
 }

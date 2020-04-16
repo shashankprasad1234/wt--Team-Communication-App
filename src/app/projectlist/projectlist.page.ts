@@ -120,11 +120,10 @@ getProj(){
   }
 
   ngOnInit() {
+    this.getProj();
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.inChatPage = false;
     
-
-
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         

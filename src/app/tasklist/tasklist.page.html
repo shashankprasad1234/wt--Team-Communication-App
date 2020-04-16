@@ -19,7 +19,7 @@
   </ion-item>
   
   <ion-item lines = "none" *ngFor="let mem of currProj.members" >
-    <ion-button *ngIf="currProj.createdBy == username || mem == username;" (click)="removeUser()"shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
+    <ion-button *ngIf="currProj.createdBy == username || mem == username;" (click)="removeUser(username)"shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
     <ion-label> {{mem}}</ion-label>
   </ion-item>
 </ion-content>
@@ -44,10 +44,11 @@
   </ion-item>
 
 
-
-
   <div class="borders"><!--*ngFor="let task of p.tasks; let i3 = index"-->
     <ion-item lines="none" *ngFor="let task of currProj.tasks; let i = index;">
+      <ion-button fill = "clear" (click)="deletetask(i)">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
       <ion-label >{{task}} [{{currProj.skills[i]}}]</ion-label>
       <ion-label>Assigned: </ion-label>
       <ion-label>Status: </ion-label>
