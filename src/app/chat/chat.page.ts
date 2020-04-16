@@ -103,6 +103,20 @@ export class ChatPage implements OnInit {
   }
 
   sendMessage(){
+    if(this.message == "list tasks"){
+      console.log("list tasks")
+      for(let i=0;i<this.userService.currProject.tasks.length;i++){
+        this.message = "".concat(this.userService.currProject.tasks[i]," : ",this.userService.currProject.taskStatus[i],"\n");
+      }
+    }
+    else{
+      if(this.message == "list members"){
+        console.log("list members")
+        for(let i=0;i<this.userService.currProject.members.length;i++){
+          this.message = "".concat(this.userService.currProject.members[i],"\n");
+        }
+      }
+    }
     console.log(this.currProject);
     this.firestore.collection(this.userService.currProject.name).add({
       group: this.userService.currProject.name,
@@ -147,8 +161,8 @@ export class ChatPage implements OnInit {
   }
   
   loadData(event){
-    
-    console.log("hi")
+    if(this.isLoading){
+      console.log("hi")
     setTimeout(() => {  this.userService.messagesLimit = this.userService.messagesLimit + 20;
     this.presUserArr = [];
     this.userService.getChatDetails(this.userService.currProject.name).subscribe(data => 
@@ -179,6 +193,8 @@ export class ChatPage implements OnInit {
       )
       event.target.complete()
     },500);
+    }
+    
 
     
   }
