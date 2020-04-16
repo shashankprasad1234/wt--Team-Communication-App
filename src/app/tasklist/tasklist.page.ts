@@ -42,6 +42,20 @@ export class TasklistPage implements OnInit {
   
   ];
 
+  skills: Array<string> = [];
+  taskname: string = "";
+  uname: string = "";
+
+  addUser()
+  {
+    let updatedProj = new Project;
+    updatedProj = this.currProj;
+    updatedProj.members.push(this.uname);
+    this.currProj = updatedProj;
+    this.fireService.updateProj(updatedProj);
+    this.uname = "";
+  }
+
   removeUser(username: string)
   {
     let updatedProj = new Project;
@@ -51,8 +65,38 @@ export class TasklistPage implements OnInit {
     {
       updatedProj.members.splice(index, 1)
     }
+    this.currProj = updatedProj;
     this.fireService.updateProj(updatedProj);
-    this.router.navigate(['main/home']);
+    if(username == this.username)
+    {
+      this.router.navigate(['main/projectlist']);
+    }
+  }
+
+  addTask()
+  {
+    let updatedProj = new Project;
+    updatedProj = this.currProj;
+    updatedProj.tasks.push(this.taskname);
+    console.log(updatedProj);
+    var tempArr = Object.values(updatedProj.skills);
+    tempArr.push(this.skills);
+    updatedProj.skills = {...tempArr};
+    this.currProj = updatedProj;
+    this.fireService.updateProj(updatedProj);
+    this.skills = [];
+  }
+
+  deleteTask(ind: number)
+  {
+    let updatedProj = new Project;
+    updatedProj = this.currProj;
+    updatedProj.tasks.splice(ind, 1);
+    var tempArr = Object.values(updatedProj.skills);
+    tempArr.splice(ind, 1);
+    updatedProj.skills = {...tempArr};
+    this.currProj = updatedProj;
+    this.fireService.updateProj(updatedProj);
   }
 
 

@@ -14,12 +14,12 @@
   </ion-item>
   <ion-item class="borders">
     <ion-label color="secondary">Members</ion-label>
-    <ion-input *ngIf="currProj.createdBy == username"type ="text" placeholder="Add Member" ></ion-input>
-    <ion-button *ngIf="currProj.createdBy == username" shape="round" size="default" color="dark"><ion-icon name="person-add"></ion-icon></ion-button>
+    <ion-input *ngIf="currProj.createdBy == username"type ="text" placeholder="Add Member"[(ngModel)]="uname" required></ion-input>
+    <ion-button (click)="addUser()" *ngIf="currProj.createdBy == username" shape="round" size="default" color="dark"><ion-icon name="person-add"></ion-icon></ion-button>
   </ion-item>
   
   <ion-item lines = "none" *ngFor="let mem of currProj.members" >
-    <ion-button *ngIf="currProj.createdBy == username || mem == username;" (click)="removeUser(username)"shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
+    <ion-button *ngIf="currProj.createdBy == username || mem == username;" (click)="removeUser(mem)"shape="round" size="small" color="dark"><ion-icon name="person-remove"></ion-icon></ion-button>
     <ion-label> {{mem}}</ion-label>
   </ion-item>
 </ion-content>
@@ -32,21 +32,20 @@
   </ion-item>
 
   <ion-item >
-    <ion-input type ="text" placeholder="Add Task" ></ion-input><!--[(ngModel)]="taskname"-->
-    <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" ><!--[(ngModel)]="skills"-->
-      <ion-select-option>Machine Learning</ion-select-option>
+    <ion-input type ="text" placeholder="Add Task" [(ngModel)]="taskname" ></ion-input>
+    <ion-select multiple="true" cancelText="Cancel" okText="Enter" placeholder="Skill Required" [(ngModel)]="skills" >
       <ion-select-option>Artifical Intelligence</ion-select-option>
       <ion-select-option>Natural Language Processing</ion-select-option>
       <ion-select-option>Network Security</ion-select-option>
       <ion-select-option>Operating Systems</ion-select-option>
     </ion-select>
-    <ion-button  shape="round" color="dark"><ion-icon name="add"></ion-icon></ion-button>
+    <ion-button  shape="round" (click)="addTask()" color="dark"><ion-icon name="add"></ion-icon></ion-button>
   </ion-item>
 
 
   <div class="borders"><!--*ngFor="let task of p.tasks; let i3 = index"-->
     <ion-item lines="none" *ngFor="let task of currProj.tasks; let i = index;">
-      <ion-button fill = "clear" (click)="deletetask(i)">
+      <ion-button fill = "clear" (click)="deleteTask(i)">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
       <ion-label >{{task}} [{{currProj.skills[i]}}]</ion-label>
