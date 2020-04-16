@@ -105,15 +105,24 @@ export class ChatPage implements OnInit {
   sendMessage(){
     if(this.message == "list tasks"){
       console.log("list tasks")
+      this.message = "";
       for(let i=0;i<this.userService.currProject.tasks.length;i++){
-        this.message = "".concat(this.userService.currProject.tasks[i]," : ",this.userService.currProject.taskStatus[i],"\n");
+        this.message = this.message.concat(this.userService.currProject.tasks[i]," : ",this.userService.currProject.taskStatus[i],"\n");
       }
     }
     else{
       if(this.message == "list members"){
+        this.message="";
         console.log("list members")
         for(let i=0;i<this.userService.currProject.members.length;i++){
-          this.message = "".concat(this.userService.currProject.members[i],"\n");
+          this.message = this.message.concat(this.userService.currProject.members[i],"\n");
+        }
+      }
+      else{
+        if(this.message == "list members -e"){
+          for(let i=0;i<this.userService.currProject.members.length;i++){
+            this.message = "".concat(this.userService.currProject.members[i],"\n");
+          }
         }
       }
     }
