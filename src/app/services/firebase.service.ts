@@ -14,7 +14,7 @@ export class FirebaseService {
   thisUser: User;
 
   currMembers: any[];
-  messagesLimit = 20;
+  messagesLimit = 30;
   inProjectPage = false;
   alreadySeen: User[] = [];
   inChatPage = false;
@@ -32,7 +32,7 @@ export class FirebaseService {
   }
 
   getChatDetails(projectname: string) {
-    let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at','desc'));
+    let chatRef = this.firestore.collection<any>(projectname, ref => ref.orderBy('created_at','desc').limit(this.messagesLimit));
     return chatRef.snapshotChanges();
   }
 

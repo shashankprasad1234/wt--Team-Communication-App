@@ -94,6 +94,8 @@ export class MenuPage implements OnInit {
 
   logOut(){
     this.authService.logoutUser();
+      this.fireSerive.inProjectPage = false;
+      this.fireSerive.inChatPage = false;
     this.fireSerive.updateLoginStatus(firebase.auth().currentUser.displayName,"offline");
     this.authService.setUser('');
 

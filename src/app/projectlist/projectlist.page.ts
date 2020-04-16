@@ -127,7 +127,7 @@ getProj(){
       setTimeout(() => {
         console.log('Projectlist page periodic refresh');
         this.getProj();
-      }, 5000);
+      }, 3000);
     }else{
       console.log(this.fireService.inProjectPage);
     }
@@ -136,6 +136,7 @@ getProj(){
 
   ngOnInit() {
     this.getProj();
+    this.fireService.inProjectPage = true;
     this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.inChatPage = false;
     

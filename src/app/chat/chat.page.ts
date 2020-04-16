@@ -132,18 +132,59 @@ export class ChatPage implements OnInit {
       setTimeout(() => {
         console.log('Chat periodic refresh');
         this.updateLoginStatus();
-      }, 60000);
+      }, 4000);
     }else{
       console.log(this.userService.inChatPage);
     }
 
   }
 
-  scrollval(){
+  delay(event){
+    setTimeout(() => {
+      this.loadData(event);
+    },1000);
+  }
+  
+  loadData(event){
+    
+    console.log("hi")
+    setTimeout(() => {  this.userService.messagesLimit = this.userService.messagesLimit + 20;
+    this.presUserArr = [];
+    this.userService.getChatDetails(this.userService.currProject.name).subscribe(data => 
+      {
+        //console.log(data);
+        this.presUserArr = [];
+        this.userArr = data.reverse().map( user => {
+          //console.log(user.payload.doc.metadata)
+          const userData = user.payload.doc.data();
+          
+          this.currProject = this.userService.currProject.name;
+            if(userData.group == this.currProject){
+              this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
+                userData.status = data.data().status
+             )
+            
+               //console.log(userData)
+              this.presUserArr.push(userData);
+            
+            }
+          return userData;
+        })
+        this.contentArea.scrollToPoint(0,1300,1);
+
+      }
+      
+      )
+      event.target.complete()
+    },500);
+
     
   }
 
+  
   ngOnInit() {
+    
+    
     this.userService.inProjectPage = false;
     
     this.scrollToBottomOnInit();
