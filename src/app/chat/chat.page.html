@@ -13,10 +13,12 @@
 
 
 <ion-content  id="m"  color="black" [scrollEvents]="true"  >
+  
   <ion-infinite-scroll threshold="100px" (ionInfinite)="delay($event)" position="top">
+    
   <ion-infinite-scroll-content
-    loadingSpinner="crescent"
-    loadingText="Loading messages...">
+   >
+  <ion-spinner style="margin-left: 47% ; margin-top: 25px;" color="light" *ngIf="isLoading==1" name= "bubbles"></ion-spinner>
   </ion-infinite-scroll-content>
 </ion-infinite-scroll>
   <ion-grid>

@@ -58,7 +58,7 @@ export class ChatPage implements OnInit {
   new_presUserArr : User[] = []
   userArr: User[] = [];
   presUserArr: User[] = [];
-  
+  isLoading = 0;
   timearr: any;
   status: string = '';
   
@@ -140,6 +140,7 @@ export class ChatPage implements OnInit {
   }
 
   delay(event){
+    this.isLoading = 1;
     setTimeout(() => {
       this.loadData(event);
     },1000);
@@ -170,6 +171,7 @@ export class ChatPage implements OnInit {
             }
           return userData;
         })
+        this.isLoading = 0;
         this.contentArea.scrollToPoint(0,1300,1);
 
       }

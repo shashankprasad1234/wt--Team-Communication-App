@@ -137,8 +137,9 @@ getProj(){
   ngOnInit() {
     this.getProj();
     this.fireService.inProjectPage = true;
-    this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
     this.fireService.inChatPage = false;
+    this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
+    
     
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
