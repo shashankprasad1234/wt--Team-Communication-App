@@ -103,6 +103,9 @@ export class HomePage {
   {
     this.tasklist.splice(index, 1);
     this.skillslist.splice(index, 1);
+    this.assignee.splice(index, 1);
+    this.taskStatus.splice(index, 1);
+
   }
   saveProject()
   {
