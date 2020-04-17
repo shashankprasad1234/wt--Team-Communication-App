@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
-import { NavController, IonContent} from '@ionic/angular';
+import { NavController, IonContent, AlertController} from '@ionic/angular';
 import { Router, RouterEvent } from '@angular/router';
 import 'firebase/auth';
 import * as firebase from 'firebase';
@@ -66,7 +66,8 @@ export class ChatPage implements OnInit {
     private router: Router,
     private firestore: AngularFirestore,
     private userService: FirebaseService,
-    public _zone: NgZone) {
+    public _zone: NgZone,
+    private alertCtrl: AlertController) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
@@ -99,6 +100,16 @@ export class ChatPage implements OnInit {
      this.userService.inChatPage = true;
      this.updateLoginStatus();    
       
+  }
+
+
+  async alert(title: string, message: string) {
+    const alert = await this.alertCtrl.create({
+      message: message,
+      subHeader: title,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   async sendMessage(){
@@ -143,6 +154,33 @@ export class ChatPage implements OnInit {
         }
         this.sendMessage(); 
       })
+      this.message = "";
+      return;
+    }
+    else if(this.message == "list resources -a"){
+      this.message = "";
+      
+      await this.userService.getRes().subscribe(async data => {
+        var dataLen = Object.keys(data).length;
+        if(dataLen < 1)
+        {
+          let alertMessage = "No incomplete tasks found.\n";
+          this.alert("",alertMessage);
+          return;
+        }
+        let alertMessage = "Resources:\n";
+        for(let i = 0; i < Object.keys(data).length; i++)
+        {
+          alertMessage = alertMessage.concat("\n", this.userService.currProject.tasks[i]);
+          for(let j = 0; j < 3; j++)
+          {
+            alertMessage = alertMessage.concat("  ", data[i][j],"\n");
+          }
+          alertMessage.concat("\n");
+        }
+        this.alert("",alertMessage);
+      })
+      return;
     }
     console.log(this.currProject);
     this.firestore.collection(this.userService.currProject.name).add({
@@ -151,6 +189,7 @@ export class ChatPage implements OnInit {
       username: this.username,
       created_at: firebase.firestore.FieldValue.serverTimestamp()
     })
+   
     this.scrollToBottomOnInit();
     this.message = '';
     //this.presUserArr = [];  
