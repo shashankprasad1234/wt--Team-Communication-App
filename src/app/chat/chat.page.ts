@@ -103,6 +103,11 @@ export class ChatPage implements OnInit {
   }
 
   async sendMessage(){
+ 
+    
+    if(this.message == ""){
+      return;
+    }
     if(this.message == "list tasks"){
       console.log("list tasks")
       this.message = "Tasks:\n";

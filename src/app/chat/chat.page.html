@@ -26,13 +26,16 @@
       <ion-col  offset="3" size="9" *ngIf="currentUser === user.username" class="message my-message"> 
         <b>{{ user.username }}</b><br>
         <span> {{ user.message }}</span><br>
-       
+       <div class="time" text-right>
+         <br><b>{{ user.created_at.toDate() | date:'short'}}</b>
+       </div>
       </ion-col>
 
       <ion-col  size="9" *ngIf="currentUser !== user.username" class="message other-message"> 
         <b>{{ user.username }}<ion-icon name="eye" *ngIf="user.status === 'online'"></ion-icon><ion-icon name="eye-off" *ngIf="user.status === 'offline'"></ion-icon></b><br>
         <span> {{ user.message }}</span>
-       
+        <div class="time" text-right>
+          <br><b>{{ user.created_at.toDate() | date:'short'}}</b></div>
       </ion-col>
     </ion-row>
   </ion-grid>
