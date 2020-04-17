@@ -97,8 +97,7 @@ export class ChatPage implements OnInit {
       })
      // console.log(this.userArr);
      this.userService.inChatPage = true;
-     this.updateLoginStatus();
-    
+     this.updateLoginStatus();    
       
   }
 
@@ -124,8 +123,15 @@ export class ChatPage implements OnInit {
     }
     else if(this.message == "list resources")
     {
-      this.message = "Resources for Incomplete Tasks:\n";
       await this.userService.getRes().subscribe(async data => {
+        var dataLen = Object.keys(data).length;
+        if(dataLen < 1)
+        {
+          this.message = "No incomplete tasks found.\n";
+          this.sendMessage(); 
+          return;
+        }
+        this.message = "Resources:\n";
         for(let i = 0; i < Object.keys(data).length; i++)
         {
           this.message = this.message.concat("\n", this.userService.currProject.tasks[i]);
@@ -170,7 +176,6 @@ export class ChatPage implements OnInit {
     }else{
       console.log(this.userService.inChatPage);
     }
-
   }
 
   delay(event){
@@ -198,10 +203,8 @@ export class ChatPage implements OnInit {
               this.firestore.collection(userData.username).doc(userData.username).get().subscribe(data => 
                 userData.status = data.data().status
              )
-            
-               //console.log(userData)
+             //console.log(userData)
               this.presUserArr.push(userData);
-            
             }
           return userData;
         })
@@ -214,19 +217,11 @@ export class ChatPage implements OnInit {
       event.target.complete()
     },500);
     }
-    
-
-    
   }
-
-  
-  ngOnInit() {
-    
-    
+ 
+  ngOnInit() {   
     this.userService.inProjectPage = false;
-    
-    this.scrollToBottomOnInit();
-    
+    this.scrollToBottomOnInit(); 
     this.userService.updateLoginStatus(this.currUser.displayName,"online");
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
