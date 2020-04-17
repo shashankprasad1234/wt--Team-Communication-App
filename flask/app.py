@@ -1,6 +1,4 @@
 from flask import Flask, request, jsonify
-from bs4 import BeautifulSoup
-import requests
 import os
 from flask_cors import CORS
 from googlesearch import search
