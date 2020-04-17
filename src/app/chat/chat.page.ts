@@ -145,10 +145,10 @@ export class ChatPage implements OnInit {
         this.message = "Resources:\n";
         for(let i = 0; i < Object.keys(data).length; i++)
         {
-          this.message = this.message.concat("\n", this.userService.currProject.tasks[i]);
+          this.message = this.message.concat("\n", this.userService.currProject.tasks[i], "\n");
           for(let j = 0; j < 3; j++)
           {
-            this.message = this.message.concat("  ", data[i][j]);
+            this.message = this.message.concat("  ", data[i][j], "\n");
           }
           this.message.concat("\n");
         }
