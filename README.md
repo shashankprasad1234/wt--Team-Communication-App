@@ -11,7 +11,10 @@ TaskMan is a Web Application designed to discuss and work on projects with your 
 	3. google
 	4. flask-cors
 
+Side Note: We have used Firebase as a BaaS and Database for this project.
+
 ## Running the app:
+Place the environment.ts file, containing the Firebase key within `/src/environment`.
 Within `/flask` run `python3 app.py runserver`.
 With the flask server running, in the project root, run the Angular app `ionic serve`.
 
