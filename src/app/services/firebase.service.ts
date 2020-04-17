@@ -2,13 +2,16 @@ import { Injectable, Query } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/models/user.model';
 import { Project } from '../models/project.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore,
+  private http: HttpClient) { }
+
   currProject: Project;
   currUserProjects: Array<Project> = [];
   thisUser: User;
@@ -19,6 +22,16 @@ export class FirebaseService {
   alreadySeen: User[] = [];
   inChatPage = false;
   
+  getRes() {
+    var body = {
+      tasks: this.currProject.tasks,
+      taskStatus: this.currProject.taskStatus
+    }
+    var url = "http://127.0.0.1:4040/getResources";
+    console.log(url, body);
+    return this.http.post(url, body);
+  }
+
   getUsers() {
     return this.firestore.collection('users').snapshotChanges();
   }
@@ -56,6 +69,7 @@ export class FirebaseService {
 
   updateProj(updatedProj: Project)
   {
+    this.currProject = updatedProj;
     let that = this;
     this.firestore.collection("projects").ref
       .where("name", "==", updatedProj.name)

@@ -5,6 +5,7 @@ import { AngularFireModule} from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore'
+import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -25,9 +26,16 @@ firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebase),AngularFireDatabaseModule,ReactiveFormsModule,AngularFireAuthModule,IonicStorageModule.forRoot()],
+  imports: [BrowserModule,
+           IonicModule.forRoot(),
+           AppRoutingModule,
+           AngularFireModule.initializeApp(environment.firebase),
+           AngularFireDatabaseModule,ReactiveFormsModule,
+           AngularFireAuthModule,IonicStorageModule.forRoot(),
+           HttpClientModule],
   providers: [
     AngularFirestore,
+    HttpClientModule,
     StatusBar,
     SplashScreen,
     AuthenticateService,

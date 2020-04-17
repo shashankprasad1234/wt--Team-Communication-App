@@ -5,7 +5,6 @@ import { FirebaseService } from '../services/firebase.service';
 import { Project } from '../models/project.model';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-tasklist',
   templateUrl: './tasklist.page.html',
@@ -145,7 +144,6 @@ export class TasklistPage implements OnInit {
       this.fireService.updateProj(updatedProj);
     }
   }
-
 
   gotoChat(){
     this.router.navigate(['main/chat']);

@@ -102,7 +102,7 @@ export class ChatPage implements OnInit {
       
   }
 
-  sendMessage(){
+  async sendMessage(){
     if(this.message == "list tasks"){
       console.log("list tasks")
       this.message = "Tasks:\n";
@@ -110,16 +110,28 @@ export class ChatPage implements OnInit {
         this.message = this.message.concat(" ",this.userService.currProject.tasks[i]," : ",this.userService.currProject.taskStatus[i],"\n");
       }
     }
-    else{
-      if(this.message == "list members"){
+    else if(this.message == "list members"){
         this.message="Members:\n";
         console.log("list members")
         for(let i=0;i<this.userService.currProject.members.length;i++){
           this.message = this.message.concat(" ",this.userService.currProject.members[i],"\n");
         }
-      }
-   
-      
+    }
+    else if(this.message == "list resources")
+    {
+      this.message = "Resources for Incomplete Tasks:\n";
+      await this.userService.getRes().subscribe(async data => {
+        for(let i = 0; i < Object.keys(data).length; i++)
+        {
+          this.message = this.message.concat("\n", this.userService.currProject.tasks[i]);
+          for(let j = 0; j < 3; j++)
+          {
+            this.message = this.message.concat("  ", data[i][j]);
+          }
+          this.message.concat("\n");
+        }
+        this.sendMessage(); 
+      })
     }
     console.log(this.currProject);
     this.firestore.collection(this.userService.currProject.name).add({
@@ -130,8 +142,7 @@ export class ChatPage implements OnInit {
     })
     this.scrollToBottomOnInit();
     this.message = '';
-    //this.presUserArr = [];
-    
+    //this.presUserArr = [];  
   }
   
   scrollToBottomOnInit() {
