@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authentication.service';
+import { FormsModule } from '@angular/forms';
 import 'firebase/auth';
 import * as firebase from 'firebase';
 

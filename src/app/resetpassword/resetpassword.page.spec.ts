@@ -18,7 +18,4 @@ describe('ResetpasswordPage', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

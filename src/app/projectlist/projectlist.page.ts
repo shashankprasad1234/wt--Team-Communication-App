@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { Router, RouterEvent, RouterModule } from '@angular/router';
 import 'firebase/auth'
 import * as firebase from 'firebase';
 import { FirebaseService } from '../services/firebase.service';
@@ -47,7 +47,7 @@ export class ProjectlistPage implements OnInit {
   projArr: Array<Project> = [];
 
   constructor(
-    private router: Router,
+    private router: Router, private RouterModule:RouterModule,
     private fireService: FirebaseService) { 
       this.router.events.subscribe((event: RouterEvent) => {
         this.selectedpath = event.url;

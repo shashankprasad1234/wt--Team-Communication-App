@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent } from '@angular/router';
+import { Router, RouterEvent, RouterModule } from '@angular/router';
 import { AuthenticateService } from '../services/authentication.service';
 import { FirebaseService } from '../services/firebase.service';
 import * as firebase from 'firebase';
@@ -103,7 +103,7 @@ export class MenuPage implements OnInit {
   }
 
   selectedpath ='';
-  constructor(private router:Router, private authService: AuthenticateService, private fireSerive: FirebaseService) {
+  constructor(private router:Router,private RouterModule:RouterModule ,private authService: AuthenticateService, private fireSerive: FirebaseService) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedpath = event.url;
     });
