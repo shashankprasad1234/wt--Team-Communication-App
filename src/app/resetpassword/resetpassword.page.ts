@@ -4,6 +4,8 @@ import { AlertController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authentication.service';
 import { error } from 'protractor';
 
+
+
 @Component({
   selector: 'app-resetpassword',
   templateUrl: './resetpassword.page.html',
@@ -37,21 +39,20 @@ export class ResetpasswordPage implements OnInit {
     this.email = email;
   }
 
-  async signupUser(): Promise<any>{
-    console.log("enter");
-    
+   signupUser(){
+
+    if(this.username.length < 8 || this.password.length < 8){
+      console.log("username or password short");
+      return 0;
+      console.log("it's executing after return");
+    }
+
     if(this.password == this.confirmpassword){
-      console.log("entered_if")
-      console.log(this.password);
-      console.log(this.confirmpassword);
-      console.log(this.username);
-      console.log(this.email);
-      
-      try{
       this.authService.signupUser(this.email, this.password, this.username).then(
         () => {
-          //this.router.navigate(['userdetail']);
-          console.log("entertrue")
+          // this.router.navigate(['userdetail']);
+          console.log("Sign up successful!");
+          
           
         },
         async error => {
@@ -62,50 +63,37 @@ export class ResetpasswordPage implements OnInit {
           });
           await alertt.present();
         }
+        
       )
-      }
-      finally
-      {
-      
-      console.log("exit");
-      console.log(this.password);
-      console.log(this.confirmpassword);
-      console.log(this.username);
-      console.log(this.email);
-      return new Promise(resolve => {
-        resolve(0);
-      });
-      }
-
+      return 1;
     }
     else{
       this.alert('Error','Passwords don\'t match');
-      console.log("enterfalse")
-      return new Promise(resolve => {
-        resolve(0);
-      });
+      console.log("SignUp unsuccessful");
+
+      return 0;
     }
   }
 
 
-  signup(){
-    if (this.password.length >=8 && this.username.length >=8)
-    {
-    if (this.password == this.confirmpassword )
-    {
-      console.log("1")
-      return 1;
-    }
-    console.log("0")
-    return 0;
-  }
-  console.log("0")
-  return 0;
-  }
+  // signup(){
+  //   if (this.password.length >=8 && this.username.length >=8)
+  //   {
+  //   if (this.password == this.confirmpassword )
+  //   {
+  //     console.log("1")
+  //     return 1;
+  //   }
+  //   console.log("0")
+  //   return 0;
+  // }
+  // console.log("0")
+  // return 0;
+  // }
 
-  gotologinpage(){
-    this.router.navigate([''])
-  }
+  // gotologinpage(){
+  //   this.router.navigate([''])
+  // }
 
   
 }
