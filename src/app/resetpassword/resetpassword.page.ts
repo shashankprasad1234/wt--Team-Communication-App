@@ -30,14 +30,32 @@ export class ResetpasswordPage implements OnInit {
     await alert.present();
   }
 
+  public setuser(username: string , password: string, confirmpassword: string, email: string){
+    this.username = username;
+    this.password = password;
+    this.confirmpassword = confirmpassword;
+    this.email = email;
+  }
 
-  async signupUser(): Promise<void>{
+  async signupUser(): Promise<any>{
+    console.log("enter");
+    
     if(this.password == this.confirmpassword){
+      console.log("entered_if")
+      console.log(this.password);
+      console.log(this.confirmpassword);
+      console.log(this.username);
+      console.log(this.email);
+      
+      try{
       this.authService.signupUser(this.email, this.password, this.username).then(
         () => {
-          this.router.navigate(['userdetail']);
+          //this.router.navigate(['userdetail']);
+          console.log("entertrue")
+          
         },
         async error => {
+          console.log("async error");
           const alertt = await this.alertCtrl.create({
             message: error.message,
             buttons: [{ text: 'Ok', role: 'cancel' }],
@@ -45,35 +63,45 @@ export class ResetpasswordPage implements OnInit {
           await alertt.present();
         }
       )
+      }
+      finally
+      {
+      
+      console.log("exit");
+      console.log(this.password);
+      console.log(this.confirmpassword);
+      console.log(this.username);
+      console.log(this.email);
+      return new Promise(resolve => {
+        resolve(0);
+      });
+      }
+
     }
     else{
       this.alert('Error','Passwords don\'t match');
+      console.log("enterfalse")
+      return new Promise(resolve => {
+        resolve(0);
+      });
     }
   }
-  // SignUp() {
-  //   if(/^[a-zA-Z][a-zA-Z0-9]*@gmail\.com$/.test(this.email)){
-  //     if(/^[a-zA-Z][a-zA-Z0-9][a-zA-Z0-9][a-zA-Z0-9][a-zA-Z0-9][a-zA-Z0-9][a-zA-Z0-9][a-zA-Z0-9]+$/.test(this.username)){
-  //       if(this.password.length < 8){
-  //         this.alert('Error','Password should be minimum 8 characters')
-  //       }
-  //       else if(this.password == this.confirmpassword){
-          
-  //         this.alert("Success","Account created")
-  //         this.router.navigate(['userdetail']);
-  //       }
-  //       else{
-  //         this.alert('Error','Passwords don\'t match')
-  //       }
-  //     }
-  //     else{
-  //       this.alert('Error', "Invalid Username")
-  //     }
-  //   }
-  //   else{
-  //     this.alert('Error', "Invalid Email Id")
-  //   }
-    
-  // }
+
+
+  signup(){
+    if (this.password.length >=8 && this.username.length >=8)
+    {
+    if (this.password == this.confirmpassword )
+    {
+      console.log("1")
+      return 1;
+    }
+    console.log("0")
+    return 0;
+  }
+  console.log("0")
+  return 0;
+  }
 
   gotologinpage(){
     this.router.navigate([''])
