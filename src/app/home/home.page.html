@@ -17,7 +17,7 @@
 
  <ion-item >
   <ion-input type ="text" placeholder="Team Member Username" id="teammem" [(ngModel)]="memname"></ion-input>
-  <ion-button size="large" (click)="addname()" fill="clear"><ion-icon name="person-add-outline" color="dark"></ion-icon></ion-button>
+  <ion-button size="large" id = "name" (click)="addname()" fill="clear"><ion-icon name="person-add-outline" color="dark"></ion-icon></ion-button>
 </ion-item>
 
  <ion-item lines="none" *ngFor="let name of namelist; let i = index" >
@@ -36,7 +36,7 @@
     <ion-select-option>Network Security</ion-select-option>
     <ion-select-option>Operating Systems</ion-select-option>
   </ion-select>
-  <ion-button size="large" (click)="addtask()" fill="clear"><ion-icon name="add" color="dark"></ion-icon></ion-button>
+  <ion-button size="large" id = "task" (click)="addtask()" fill="clear"><ion-icon name="add" color="dark"></ion-icon></ion-button>
 </ion-item>
  
 <ion-item lines="none" *ngFor="let task of tasklist; let i = index" > 
@@ -50,6 +50,6 @@
 
 <ion-footer class="foot">
   <div class="cenBut">
-    <ion-button expand="block" style="text-align: center;" color="dark" (click)="saveProject()">Save Project</ion-button>
+    <ion-button id ="save" expand="block" style="text-align: center;" color="dark" (click)="saveProject()">Save Project</ion-button>
   </div>
 </ion-footer>

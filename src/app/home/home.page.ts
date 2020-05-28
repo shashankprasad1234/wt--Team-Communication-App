@@ -25,6 +25,7 @@ export class HomePage {
   taskname: string = "";
   memname: string = "";
   projname: string = "";
+  displayname: string = "";//added for testing
   currUser = firebase.auth().currentUser;
 
 
@@ -73,7 +74,24 @@ export class HomePage {
     });
   }
   
+  public setdata(displayname: string, projname: string , memname: string, taskname: string, skills: any[]){
+    console.log("entered setdata()");
+    this.projname = projname;
+    console.log(projname);
+    this.displayname = displayname;
+    console.log(displayname);
+    this.memname = memname;
+    console.log(memname);
+    this.taskname = taskname;
+    console.log(taskname);
+    this.skills = skills;
+    console.log(skills);
+  }//setdata("test1234","newproject", [test1234,testuser],"do task 1",["Machine Learning", "Operating Systems"])
+
+
   addname() {
+    console.log("in addname()");
+    console.log("memname:",this.memname);
     if (this.memname.length > 0) {
       let name = this.memname;
       this.namelist.push(name);
@@ -88,6 +106,8 @@ export class HomePage {
 
   addtask()
   {
+    console.log("in addtask()")
+    console.log("taskname:", this.taskname);
     if (this.taskname.length > 0) {
       let name = this.taskname;
       this.tasklist.push(name);
@@ -109,21 +129,28 @@ export class HomePage {
   }
   saveProject()
   {
+    console.log("entered_saveproject")
+    console.log(this.projname);
+    console.log(this.namelist);
+    console.log(this.tasklist);
     if(this.projname.length == 0)
     {
-      this.presentToast('Project Name Empty');
+      //this.presentToast('Project Name Empty');
+      return 0;
     } 
     else if(this.namelist.length == 0)
     {
-      this.presentToast('No members added');
+      //this.presentToast('No members added');
+      return 0;
     }
     else if(this.tasklist.length == 0)
     {
-      this.presentToast(' No tasks added');      
+      //this.presentToast(' No tasks added');  
+      return 0;    
     }
     else{
-
-    this.currProj.createdBy = this.currUser.displayName;
+    return 1; 
+    this.currProj.createdBy = this.displayname;//changed for testing
     this.currProj.members = this.namelist;
     this.currProj.name = this.projname;
     this.currProj.tasks = this.tasklist;
@@ -132,7 +159,8 @@ export class HomePage {
     this.currProj.assignee = this.assignee;
     console.log(this.currProj);
     this.fireService.createProject(this.currProj); 
-    this.router.navigate(['main/projectlist']) 
+    //this.router.navigate(['main/projectlist']);
+ 
     }
   }
 
@@ -150,9 +178,9 @@ export class HomePage {
   ngOnInit(){
     this.fireService.inProjectPage = false;
     this.fireService.inChatPage = false;
-    this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
-    this.firestore.collection(this.currUser.displayName).doc(this.currUser.displayName).get().subscribe(data => console.log(data.data().status));
-    console.log(this.authService.getUser());
+    //this.fireService.updateLoginStatus(this.currUser.displayName,"offline");
+    //this.firestore.collection(this.currUser.displayName).doc(this.currUser.displayName).get().subscribe(data => console.log(data.data().status));
+    //console.log(this.authService.getUser());
     let self = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

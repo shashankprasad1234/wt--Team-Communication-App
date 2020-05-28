@@ -44,31 +44,31 @@ export class ResetpasswordPage implements OnInit {
     if(this.username.length < 8 || this.password.length < 8){
       console.log("username or password short");
       return 0;
-      console.log("it's executing after return");
     }
 
     if(this.password == this.confirmpassword){
       this.authService.signupUser(this.email, this.password, this.username).then(
         () => {
-          // this.router.navigate(['userdetail']);
+          this.router.navigate(['userdetail']);
           console.log("Sign up successful!");
           
           
         },
-        async error => {
-          console.log("async error");
-          const alertt = await this.alertCtrl.create({
-            message: error.message,
-            buttons: [{ text: 'Ok', role: 'cancel' }],
-          });
-          await alertt.present();
-        }
+
+        // async error => {
+        //   console.log("async error");
+        //   const alertt = await this.alertCtrl.create({
+        //     message: error.message,
+        //     buttons: [{ text: 'Ok', role: 'cancel' }],
+        //   });
+        //   await alertt.present();
+        // }
         
       )
       return 1;
     }
     else{
-      this.alert('Error','Passwords don\'t match');
+      //this.alert('Error','Passwords don\'t match');
       console.log("SignUp unsuccessful");
 
       return 0;
@@ -91,9 +91,9 @@ export class ResetpasswordPage implements OnInit {
   // return 0;
   // }
 
-  // gotologinpage(){
-  //   this.router.navigate([''])
-  // }
+  gotologinpage(){
+   this.router.navigate([''])
+  }
 
   
 }
